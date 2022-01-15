@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "johnsoncodehk.volar", 
+    "dbaeumer.vscode-eslint", 
+    "voorjaar.windicss-intellisense",
+    "dbaeumer.vscode-eslint",
+    "usernamehw.errorlens",
+    "mhutchie.git-graph",
+    "greatminds.gitflow4code",
+    "eamodio.gitlens",
+    "ritwickdey.liveserver",
+    "abusaidm.html-snippets",
+    "sidthesloth.html5-boilerplate",
+    "tabnine.tabnine-vscode",
+    "dracula-theme.theme-dracula",
+    "antfu.vite",
+    "antfu.browse-lite",
+    "jianglinghao.vscode-npm-scripts",
+    "vscode-icons-team.vscode-icons",
+    "formulahendry.auto-rename-tag",
+    "adpyke.codesnap",
+    "ms-azuretools.vscode-docker"]
+}
