@@ -6,54 +6,34 @@
     <button class="border border-2" @click.prevent="signup(data.username, data.email, data.password)">
       Submit
     </button>
+    <div v-if="networkResponse?.data">
+      <p>Successfully Signed Up!</p>
+    </div>
+    <div v-if="networkResponse?.error">
+      {{ networkResponse.error }}
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useMutation } from '@urql/vue'
+import { Signup } from '@/graphql/mutations'
+const data = reactive({
+  username: '',
+  email: '',
+  password: '',
+})
 
-export default {
-  setup() {
-    const data = reactive({
-      username: '',
-      email: '',
-      password: '',
-    })
+const networkResponse = ref()
 
-    const signupMutation = useMutation(`
-      mutation ($name: String!, $email: String!, $password: String!) {   
-        signup (name: $name, email: $email, password: $password) {      
-          token 
-            user {
-              id
-            }
-         }
-       }
-    `)
+const signupMutation = useMutation(Signup)
 
-    return {
-      data,
-      signup(name: string, email: string, password: string) {
-        const variables = { name, email, password }
-        signupMutation.executeMutation(variables)
-      },
-    }
-  },
-
+const signup = (name: string, email: string, password: string) => {
+  const variables = { name, email, password }
+  signupMutation.executeMutation(variables).then((result) => {
+    networkResponse.value = result
+  })
 }
-
-// const signup = (username: string, email: string, password: string) => {
-//   useMutation(`
-//       mutation signup(name: ${username}, email: ${email}), password: ${password} {
-//         token {
-//           user {
-//             id
-//           }
-//         }
-//       }
-//     `)
-// }
-
 </script>
 
 <style scoped>
