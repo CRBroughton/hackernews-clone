@@ -6,9 +6,12 @@
     <router-link to="/create" class="text-gray-900 ml-auto">
       Create Post
     </router-link>
-    <a href="" class="text-gray-900 ml-2">
+    <router-link to="/login" class="text-gray-900 ml-2">
       Login
-    </a>
+    </router-link>
+    <router-link to="/register" class="text-gray-900 ml-2">
+      Register
+    </router-link>
   </div>
 </template>
 
