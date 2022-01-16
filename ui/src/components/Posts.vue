@@ -5,8 +5,8 @@
   <div v-else-if="error">
     Oh no... {{ error }}
   </div>
-  <div v-else>
-    <div v-for="post in data.feed" :key="post.id" class="text-white">
+  <div v-else class="mt-2">
+    <div v-for="post in data.feed" :key="post.id" class="text-white ml-2">
       <Post :description="post.description" :url="post.url" :posted-by="post.postedBy" />
     </div>
   </div>
