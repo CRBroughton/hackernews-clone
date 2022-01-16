@@ -1,0 +1,28 @@
+<template>
+  <div v-if="fetching">
+    Loading...
+  </div>
+  <div v-else-if="error">
+    Oh no... {{ error }}
+  </div>
+  <div v-else class="mt-2">
+    <div v-for="post in data.feed.reverse()" :key="post.id" class="text-white ml-2">
+      <Post :description="post.description" :url="post.url" :posted-by="post.postedBy" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useQuery } from '@urql/vue'
+import { homePage } from '@/graphql/queries'
+const result = useQuery(homePage)
+
+const fetching = result.fetching
+const data = result.data
+const error = result.error
+
+</script>
+
+<style scoped>
+
+</style>
