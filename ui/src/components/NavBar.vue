@@ -3,8 +3,11 @@
     <p class="text-gray-900">
       Hackernews Clone
     </p>
-    <a href="" class="text-gray-900 ml-auto">
-      login
+    <router-link to="/create" class="text-gray-900 ml-auto">
+      Create Post
+    </router-link>
+    <a href="" class="text-gray-900 ml-2">
+      Login
     </a>
   </div>
 </template>
