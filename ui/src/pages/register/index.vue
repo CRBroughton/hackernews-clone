@@ -20,7 +20,7 @@ export default {
       password: '',
     })
 
-    const signup = useMutation(`
+    const signupMutation = useMutation(`
       mutation ($name: String!, $email: String!, $password: String!) {   
         signup (name: $name, email: $email, password: $password) {      
           token 
@@ -33,9 +33,9 @@ export default {
 
     return {
       data,
-      signup(name: any, email: any, password: any) {
+      signup(name: string, email: string, password: string) {
         const variables = { name, email, password }
-        signup.executeMutation(variables)
+        signupMutation.executeMutation(variables)
       },
     }
   },
