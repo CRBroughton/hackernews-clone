@@ -6,7 +6,7 @@
     Oh no... {{ error }}
   </div>
   <div v-else class="mt-2">
-    <div v-for="post in data.feed" :key="post.id" class="text-white ml-2">
+    <div v-for="post in data.feed.reverse()" :key="post.id" class="text-white ml-2">
       <Post :description="post.description" :url="post.url" :posted-by="post.postedBy" />
     </div>
   </div>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { useQuery } from '@urql/vue'
-import { homePage } from '@/queries'
+import { homePage } from '@/graphql/queries'
 const result = useQuery(homePage)
 
 const fetching = result.fetching
