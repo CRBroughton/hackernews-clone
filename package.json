@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
-    "generate": "ts-node --transpile-only src/schema.ts"
+    "generate": "ts-node --transpile-only src/schema.ts",
+    "docker": "nodemon --config nodemon.json src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "@types/jsonwebtoken": "~8.5.0",
     "apollo-server-core": "^3.6.1",
     "eslint": "8.6.0",
+    "nodemon": "^2.0.15",
     "prisma": "^3.5.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
