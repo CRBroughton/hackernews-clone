@@ -8,6 +8,9 @@
     "generate": "ts-node --transpile-only src/schema.ts",
     "docker": "nodemon --config nodemon.json src/index.ts"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
