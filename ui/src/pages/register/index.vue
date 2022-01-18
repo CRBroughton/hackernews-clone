@@ -1,3 +1,39 @@
+<script setup lang="ts">
+import { useMutation } from '@urql/vue'
+import type { OperationResult } from '@urql/vue'
+import { promiseTimeout } from '@vueuse/core'
+import { Signup } from '@/graphql/mutations'
+
+const router = useRouter()
+
+const data = reactive({
+  username: '',
+  email: '',
+  password: '',
+})
+
+const networkResponse = ref()
+
+const signupMutation = useMutation(Signup)
+
+const goToHome = async(result: OperationResult<any, any>) => {
+  networkResponse.value = result
+  await promiseTimeout(1000)
+  router.push('/')
+}
+
+const signup = (name: string, email: string, password: string) => {
+  const variables = { name, email, password }
+  signupMutation.executeMutation(variables).then(async(result) => {
+    if (result.error) {
+      networkResponse.value = result
+      return
+    }
+    goToHome(result)
+  })
+}
+</script>
+
 <template>
   <div class="flex flex-col gap-1 w-60 p-2">
     <input v-model="data.username" class="border border-2" type="text" placeholder="username">
@@ -14,27 +50,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useMutation } from '@urql/vue'
-import { Signup } from '@/graphql/mutations'
-const data = reactive({
-  username: '',
-  email: '',
-  password: '',
-})
-
-const networkResponse = ref()
-
-const signupMutation = useMutation(Signup)
-
-const signup = (name: string, email: string, password: string) => {
-  const variables = { name, email, password }
-  signupMutation.executeMutation(variables).then((result) => {
-    networkResponse.value = result
-  })
-}
-</script>
 
 <style scoped>
 

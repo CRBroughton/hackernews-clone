@@ -5,13 +5,22 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Pages from 'vite-plugin-pages'
 import istanbul from 'vite-plugin-istanbul'
-
+import Icons from 'unplugin-icons/vite'
+import ViteIconsResolver from 'unplugin-icons/resolver'
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 4000,
   },
-  plugins: [Vue(), WindiCSS(), Pages(), Components({ dts: true }),
+  plugins: [
+    Vue(),
+    WindiCSS(),
+    Pages(),
+    Components({
+      dts: true,
+      resolvers: ViteIconsResolver({ componentPrefix: '' }),
+    }),
+    Icons(),
     AutoImport({
       // targets to transform
       include: [
