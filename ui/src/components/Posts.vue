@@ -1,9 +1,12 @@
 <template>
-  <div v-if="fetching">
+  <div v-if="fetching" class="mt-2">
     Loading...
   </div>
   <div v-else-if="error">
     Oh no... {{ error }}
+  </div>
+  <div v-else-if="!data.feed.length" class="mt-2">
+    There are no posts!
   </div>
   <div v-else class="mt-2">
     <div v-for="post in data.feed.reverse()" :key="post.id" class="text-white ml-2">
