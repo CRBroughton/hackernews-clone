@@ -29,5 +29,3 @@ If .env variables aren't working:
 ```
 npx prisma generate
 ```
-
-If you want to use prisma studio, first spin up your docker containers, then change the 'db' path in the DATABASE_URL to localhost
