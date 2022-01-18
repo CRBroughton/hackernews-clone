@@ -18,6 +18,18 @@ const userData: Prisma.UserCreateInput[] = [
           description: 'Code-First GraphQL schemas for JavaScript/TypeScript',
           url: 'https://nexusjs.org',
         },
+        {
+          id: uuidGenerator(),
+          createdAt: new Date(),
+          description: 'My Portfolio',
+          url: 'https://crbroughton.me',
+        },
+        {
+          id: uuidGenerator(),
+          createdAt: new Date(),
+          description: 'Vite.js',
+          url: 'https://vitejs.dev',
+        },
       ],
     },
   },
