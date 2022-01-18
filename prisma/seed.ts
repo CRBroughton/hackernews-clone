@@ -1,14 +1,25 @@
 import type { Prisma } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
+import { uuidGenerator } from '../src/utils/uuidGenerator'
 
 const prisma = new PrismaClient()
 
-const userData: Prisma.UserCreateWithoutVotesInput[] = [
+const userData: Prisma.UserCreateInput[] = [
   {
-    id: Date.now().toString(),
+    id: uuidGenerator(),
     name: 'Alice',
     email: 'alice@prisma.io',
     password: 'mypassword',
+    posts: {
+      create: [
+        {
+          id: uuidGenerator(),
+          createdAt: new Date(),
+          description: 'Code-First GraphQL schemas for JavaScript/TypeScript',
+          url: 'https://nexusjs.org',
+        },
+      ],
+    },
   },
 ]
 
