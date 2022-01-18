@@ -4,7 +4,7 @@
       <a :href="props.url">{{ props.description }}</a> <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
     </h1>
     <p class="text-xs text-gray-700">
-      {{ `Posted by ${props.postedBy.name}` }}
+      {{ `${props.voters} points` }} {{ `Posted by ${props.postedBy.name}` }}
     </p>
   </div>
 </template>
@@ -16,6 +16,7 @@ interface Props {
   postedBy: {
     name: string
   }
+  voters: number
 }
 
 const props = defineProps<Props>()

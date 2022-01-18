@@ -7,6 +7,9 @@ export const homePage = {
                   postedBy {
                   name
                   }
+                  voters {
+                    id
+                  }
               }
           }
         `,
