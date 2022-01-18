@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-export const APP_SECRET = process.env.APP_SECRET as string
+export const APP_SECRET = process.env.SECRET as string
 
 export interface AuthTokenPayload { // 1
   userId: number

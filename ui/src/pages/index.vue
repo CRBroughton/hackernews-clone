@@ -1,15 +1,19 @@
 
 <script setup lang="ts">
-const router = useRouter()
-const name = ref('')
+// const router = useRouter()
+// const name = ref('')
 
-const go = () => {
-  if (name.value) router.push(`/users/${encodeURIComponent(name.value)}`)
-}
+// const go = () => {
+//   if (name.value) router.push(`/users/${encodeURIComponent(name.value)}`)
+// }
 </script>
 
 <template>
-  <div
+  <div class="p-4 bg-gray-200">
+    <NavBar />
+    <Posts />
+  </div>
+  <!-- <div
     class="flex-div"
     text="white"
     font="bold"
@@ -28,11 +32,11 @@ const go = () => {
       placeholder="Enter text here to go to a dynamic page"
       @keydown.enter="go"
     >
-  </div>
+  </div> -->
 </template>
 
 <style lang="scss">
 .flex-div {
-  @apply flex flex-col items-center pt-15;
+  @apply flex flex-col pt-15;
 }
 </style>
