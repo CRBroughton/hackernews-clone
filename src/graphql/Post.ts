@@ -86,14 +86,32 @@ export const deletePost = extendType({
       },
 
       async resolve(_parent, args, context) {
+        const { userId } = context
+
+        const getPostedUser = await context.prisma.post.findUnique({
+          where: {
+            id: args.id,
+          },
+          select: {
+            postedById: true,
+          },
+        })
+
+        if (!userId)
+          throw new Error('Cannot post without logging in.')
+
+        if (!getPostedUser?.postedById)
+          throw new Error('Post does not exist!')
+
+        if (getPostedUser?.postedById !== userId)
+          throw new Error('Cannot delete posts that you dont own!')
+
         await context.prisma.post.delete({
           where: {
             id: args.id,
           },
         })
         return `deleted post ${args.id}`
-        // links = links.filter(link => link.id !== args.id)
-        // return `deleted post ${args.id}`
       },
     })
   },

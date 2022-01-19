@@ -11,4 +11,4 @@ EXPOSE 3000
 
 RUN npm i --legacy-peer-deps && npx prisma generate
 
-CMD ["npm", "run", "docker"]
+CMD ["npm", "run", "dev"]
