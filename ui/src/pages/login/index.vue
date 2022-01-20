@@ -30,7 +30,7 @@ const login = (email: string, password: string) => {
       return
     }
 
-    cookie.setCookie('Bearer', result.data.login.token)
+    cookie.setCookie('Bearer', result.data.login.token, { expire: '7d', secure: 'true', sameSite: 'strict' })
     goToHome(result)
   })
 }
