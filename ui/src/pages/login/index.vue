@@ -29,6 +29,7 @@ const login = (email: string, password: string) => {
     }
 
     cookie.setCookie('Bearer', result.data.login.token, { expire: '7d', secure: 'true', sameSite: 'strict' })
+    store.logInUser(true)
     goToHome(result)
   })
 }
