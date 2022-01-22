@@ -1,11 +1,27 @@
 
 <script setup lang="ts">
-// const router = useRouter()
-// const name = ref('')
+import { useMutation } from '@urql/vue'
+import { useCookie } from 'vue-cookie-next'
+import { Authenticate } from '@/graphql/mutations'
+import { authStore } from '@/store'
 
-// const go = () => {
-//   if (name.value) router.push(`/users/${encodeURIComponent(name.value)}`)
-// }
+const cookie = useCookie()
+const store = authStore()
+const storedCookie = cookie.getCookie('bearer')
+
+const authenticateUser = async() => {
+  const authenticateMutation = useMutation(Authenticate)
+  await authenticateMutation.executeMutation(storedCookie)
+
+  // TODO Must delete local cookie if back end does not find user
+
+  store.logInUser(true)
+}
+
+onMounted(() => {
+  if (!storedCookie) return
+  authenticateUser()
+})
 </script>
 
 <template>
@@ -13,26 +29,6 @@
     <NavBar />
     <Posts />
   </div>
-  <!-- <div
-    class="flex-div"
-    text="white"
-    font="bold"
-  >
-    <img alt="Vue logo" src="@/assets/logo.png" class="vue-logo w-32">
-    <HelloWorld msg="My Vite Template" />
-    <router-link class="font-bold" to="/about">
-      Go to the about page
-    </router-link>
-    <input
-      v-model="name"
-      w="70"
-      text="center"
-      bg="gray-800"
-      type="text"
-      placeholder="Enter text here to go to a dynamic page"
-      @keydown.enter="go"
-    >
-  </div> -->
 </template>
 
 <style lang="scss">
