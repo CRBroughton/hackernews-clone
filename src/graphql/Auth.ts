@@ -16,6 +16,31 @@ export const AuthPayload = objectType({
 export const AuthMutation = extendType({
   type: 'Mutation',
   definition(t) {
+    t.nonNull.field('authenticate', {
+      type: 'AuthPayload',
+      args: {
+        cookie: nonNull(stringArg()),
+      },
+      async resolve(_, args, context) {
+        const cookie = decodeAuthHeader(args.cookie)
+        const token = cookie.userId
+
+        const verifiedUser = cookie.userId.toString()
+
+        const user = await context.prisma.user.findUnique({
+          where: { id: verifiedUser },
+        })
+
+        if (!user)
+          throw new Error('This account does not exist')
+
+        return {
+          token,
+          user,
+        }
+      },
+    })
+
     t.nonNull.field('login', {
       type: 'AuthPayload',
       args: {
