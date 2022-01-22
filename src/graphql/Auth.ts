@@ -1,13 +1,13 @@
 import { extendType, nonNull, objectType, stringArg } from 'nexus'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
-import { APP_SECRET } from '../utils/auth'
+import { APP_SECRET, decodeAuthHeader } from '../utils/auth'
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition(t) {
-    t.nonNull.string('token')
-    t.nonNull.field('user', {
+    t.string('token')
+    t.field('user', {
       type: 'User',
     })
   },
