@@ -4,7 +4,7 @@ services:
   db:
     container_name: hackernews-clone-db
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -15,6 +15,7 @@ services:
       - ~/prisma-postgres:/var/lib/postgresql/data
   server:
     container_name: hackernews-clone-graphql
+    restart: unless-stopped
     build: .
     ports:
       - "3000:3000"
