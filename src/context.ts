@@ -9,10 +9,11 @@ export interface Context { // 1
   userId?: string
 }
 
-export const context = ({ req }: { req: Request }): Context => { // 2
+export const context = ({ req }: { req: Request }): Context => {
+  const storedCookie = req.headers.bearer as string
   const token
-      = req && req.headers.authorization
-        ? decodeAuthHeader(req.headers.authorization)
+      = req && req.headers.bearer
+        ? decodeAuthHeader(storedCookie)
         : null
 
   return {

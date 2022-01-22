@@ -4,15 +4,13 @@ import { useMutation } from '@urql/vue'
 import { useCookie } from 'vue-cookie-next'
 import { promiseTimeout } from '@vueuse/core'
 import { Login } from '@/graphql/mutations'
+import { authStore } from '@/store'
 
 const cookie = useCookie()
 const router = useRouter()
-const networkResponse = ref()
+const store = authStore()
 
-const data = reactive({
-  email: '',
-  password: '',
-})
+const networkResponse = ref()
 
 const loginMutation = useMutation(Login)
 
@@ -30,7 +28,8 @@ const login = (email: string, password: string) => {
       return
     }
 
-    cookie.setCookie('Bearer', result.data.login.token)
+    cookie.setCookie('bearer', result.data.login.token, { expire: '7d', secure: 'true', sameSite: 'strict' })
+    store.logInUser(true)
     goToHome(result)
   })
 }
@@ -38,9 +37,9 @@ const login = (email: string, password: string) => {
 
 <template>
   <div class="flex flex-col gap-1 w-60 p-2">
-    <input v-model="data.email" class="border border-2" type="text" placeholder="email">
-    <input v-model="data.password" class="border border-2" type="text" placeholder="password">
-    <button class="border border-2" @click.prevent="login(data.email, data.password)">
+    <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
+    <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
+    <button class="border border-2" @click.prevent="login(store.credentials.email, store.credentials.password)">
       Submit
     </button>
     <div v-if="networkResponse?.data">
