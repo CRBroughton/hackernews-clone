@@ -5,11 +5,11 @@ dotenv.config()
 export const APP_SECRET = process.env.SECRET as string
 
 export interface AuthTokenPayload { // 1
-  userId: number
+  userId: string
 }
 
 export function decodeAuthHeader(authHeader: String): AuthTokenPayload { // 2
-  const token = authHeader.replace('Bearer ', '') // 3
+  const token = authHeader.replace('bearer ', '') // 3
 
   if (!token)
     throw new Error('No token found')
