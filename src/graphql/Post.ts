@@ -54,13 +54,20 @@ export const PostMutation = extendType({
         url: nonNull(stringArg()),
       },
 
-      resolve(_parent, args, context) {
+      async resolve(_parent, args, context) {
         const { description, url } = args
         const { userId } = context
 
         if (!userId) { // 1
           throw new Error('Cannot post without logging in.')
         }
+
+        const user = await context.prisma.user.findUnique({
+          where: { id: userId },
+        })
+
+        if (user?.banned)
+          throw new Error(`You are banned! \r\n Reason: ${user.banReason}`)
 
         const newPost = context.prisma.post.create({
           data: {

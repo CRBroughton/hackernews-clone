@@ -52,21 +52,23 @@ export const AuthMutation = extendType({
         const user = await context.prisma.user.findUnique({
           where: { email },
         })
+
         if (!user)
           throw new Error('No such user found')
 
-        // 2
         const valid = await bcrypt.compare(
           args.password,
           user.password,
         )
+
         if (!valid)
           throw new Error('Invalid password')
 
-        // 3
+        if (user.banned)
+          throw new Error(`You are banned! \r\n Reason: ${user.banReason}`)
+
         const token = jwt.sign({ userId: user.id }, APP_SECRET)
 
-        // 4
         return {
           token,
           user,

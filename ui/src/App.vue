@@ -1,4 +1,16 @@
+
 <script setup lang="ts">
+import { useCookie } from 'vue-cookie-next'
+import { authStore } from '@/store'
+
+onMounted(() => {
+  const cookie = useCookie()
+  const store = authStore()
+  const storedCookie = cookie.getCookie('Authorization')
+  if (!storedCookie) return
+  store.logInUser(true)
+})
+
 </script>
 
 <template>
@@ -7,9 +19,8 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 </style>

@@ -2,6 +2,7 @@ export const homePage = {
   query: `
           {
               feed {
+                  id
                   description
                   url
                   postedBy {
@@ -11,6 +12,24 @@ export const homePage = {
                     id
                   }
               }
+          }
+        `,
+}
+
+export const getUserPosts = {
+  query: `
+          {
+            getUserPosts {
+              id
+              description
+              url
+              postedBy {
+              name
+              }
+              voters {
+                id
+              }
+            } 
           }
         `,
 }
