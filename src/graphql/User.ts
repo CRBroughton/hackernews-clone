@@ -6,6 +6,8 @@ export const User = objectType({
     t.nonNull.string('id')
     t.nonNull.string('name')
     t.nonNull.string('email')
+    t.nonNull.boolean('banned')
+    t.string('banReason')
     t.nonNull.list.nonNull.field('posts', { // 1
       type: 'Post',
       resolve(parent, _args, context) { // 2

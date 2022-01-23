@@ -10,6 +10,8 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Alice',
     email: 'alice@prisma.io',
     password: 'mypassword',
+    banned: false,
+    banReason: null,
     posts: {
       create: [
         {

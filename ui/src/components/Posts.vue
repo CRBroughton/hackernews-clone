@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { useQuery } from '@urql/vue'
+import { homePage } from '@/graphql/queries'
+
+const result = useQuery(homePage)
+
+const fetching = result.fetching
+const data = result.data
+const error = result.error
+</script>
+
 <template>
   <div v-if="fetching" class="mt-2">
     Loading...
@@ -14,17 +25,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useQuery } from '@urql/vue'
-import { homePage } from '@/graphql/queries'
-const result = useQuery(homePage)
-
-const fetching = result.fetching
-const data = result.data
-const error = result.error
-
-</script>
 
 <style scoped>
 
