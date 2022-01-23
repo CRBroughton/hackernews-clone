@@ -15,3 +15,21 @@ export const homePage = {
           }
         `,
 }
+
+export const getUserPosts = {
+  query: `
+          {
+            getUserPosts {
+              id
+              description
+              url
+              postedBy {
+              name
+              }
+              voters {
+                id
+              }
+            } 
+          }
+        `,
+}

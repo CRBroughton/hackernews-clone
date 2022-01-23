@@ -12,7 +12,7 @@ const storedCookie = cookie.getCookie('Authorization')
 
 const authenticateUser = async() => {
   const authenticateMutation = useMutation(Authenticate)
-  await authenticateMutation.executeMutation(storedCookie)
+  await authenticateMutation.executeMutation(storedCookie) // possibly wrong?
 
   // TODO Must delete local cookie if back end does not find user
 

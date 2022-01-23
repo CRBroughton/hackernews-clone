@@ -30,14 +30,13 @@ export const User = objectType({
 export const userPostQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.nonNull.field('testy', {
+    t.nonNull.list.nonNull.field('getUserPosts', {
       type: 'Post',
-      args: {
-        id: nonNull(stringArg()),
-      },
-      resolve(_parent, args, context) {
+      resolve(_parent, _args, context) {
+        const { userId } = context
+
         return context.prisma.post.findMany({
-          where: { postedById: args.id },
+          where: { postedById: userId },
         })
       },
     })
