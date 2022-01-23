@@ -38,7 +38,3 @@ const createPost = (url: string, description: string) => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

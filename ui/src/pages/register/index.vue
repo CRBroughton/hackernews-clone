@@ -45,7 +45,3 @@ const signup = (name: string, email: string, password: string) => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

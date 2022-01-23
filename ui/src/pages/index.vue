@@ -4,6 +4,7 @@ import { useMutation } from '@urql/vue'
 import { useCookie } from 'vue-cookie-next'
 import { Authenticate } from '@/graphql/mutations'
 import { authStore } from '@/store'
+import DefaultLayout from '@/components/DefaultLayout.vue'
 
 const cookie = useCookie()
 const store = authStore()
@@ -25,14 +26,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-4 bg-gray-200">
+  <DefaultLayout>
     <NavBar />
     <Posts />
-  </div>
+  </DefaultLayout>
 </template>
-
-<style lang="scss">
-.flex-div {
-  @apply flex flex-col pt-15;
-}
-</style>

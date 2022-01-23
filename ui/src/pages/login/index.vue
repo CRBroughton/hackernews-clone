@@ -51,7 +51,3 @@ const login = (email: string, password: string) => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

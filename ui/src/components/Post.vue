@@ -27,7 +27,7 @@ const voteForPost = (postId: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col text-gray-800 pb-2">
+  <div class="flex flex-col my-2 px-2 py-4 text-gray-800 bg-gray-100">
     <div class="flex">
       <MdiMenuUp class="hover:cursor-pointer" @click="voteForPost(props.id)" />
       <h1 class="text-sm">
@@ -35,11 +35,7 @@ const voteForPost = (postId: string) => {
       </h1>
     </div>
     <p class="text-xs text-gray-700 ml-1">
-      {{ `${props.voters} points` }} {{ `Posted by ${props.postedBy.name}` }}
+      {{ `${props.voters} points` }} {{ `posted by ${props.postedBy.name}` }}
     </p>
   </div>
 </template>
-
-<style scoped>
-
-</style>
