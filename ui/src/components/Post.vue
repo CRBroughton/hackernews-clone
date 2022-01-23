@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useMutation } from '@urql/vue'
+import { Vote } from '@/graphql/mutations'
 
 interface Props {
+  id: string
   description: string
   url: string
   postedBy: {
@@ -10,12 +13,23 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const voteMutation = useMutation(Vote)
+const networkResponse = ref()
+
+const voteForPost = (postId: string) => {
+  const variables = { postId }
+  voteMutation.executeMutation(variables).then(async(result) => {
+    if (result.error)
+      networkResponse.value = result
+  })
+}
 </script>
 
 <template>
   <div class="flex flex-col text-gray-800 pb-2">
     <div class="flex">
-      <MdiMenuUp />
+      <MdiMenuUp class="hover:cursor-pointer" @click="voteForPost(props.id)" />
       <h1 class="text-sm">
         <a :href="props.url">{{ props.description }}</a> <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
       </h1>
