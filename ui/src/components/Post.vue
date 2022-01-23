@@ -27,7 +27,7 @@ const voteForPost = (postId: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col my-2 px-2 py-4 text-gray-800 bg-gray-100">
+  <div class="my-2 px-2 py-4 text-gray-800 bg-gray-100">
     <div class="flex">
       <MdiMenuUp class="hover:cursor-pointer" @click="voteForPost(props.id)" />
       <h1 class="text-sm">

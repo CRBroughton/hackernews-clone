@@ -13,9 +13,9 @@ const logout = () => {
 
 <template>
   <div class="bg-gray-800 py-4 px-6 flex text-white">
-    <p>
+    <router-link to="/">
       Hackernews Clone
-    </p>
+    </router-link>
     <div v-if="store.loggedIn" class="ml-auto">
       <router-link to="/create" class="mx-2">
         Create Post
@@ -25,11 +25,11 @@ const logout = () => {
       </button>
     </div>
     <div v-else class="ml-auto">
-      <router-link to="/login" class="mx-2">
-        Login
-      </router-link>
       <router-link to="/register">
         Register
+      </router-link>
+      <router-link to="/login" class="mx-2">
+        Login
       </router-link>
     </div>
   </div>

@@ -27,7 +27,6 @@ onMounted(() => {
 
 <template>
   <DefaultLayout>
-    <NavBar />
     <Posts />
   </DefaultLayout>
 </template>
