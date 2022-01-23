@@ -17,7 +17,8 @@ const loginMutation = useMutation(Login)
 const goToHome = async(result: OperationResult<any, any>) => {
   networkResponse.value = result
   await promiseTimeout(1000)
-  router.push('/')
+  await router.push('/')
+  location.reload()
 }
 
 const login = (email: string, password: string) => {
