@@ -13,11 +13,12 @@ const createPost = (url: string, description: string) => {
   const variables = { url, description }
 
   createMutation.executeMutation(variables).then(async(result) => {
-    if (result.error)
+    if (result.error) {
       networkResponse.value = result
+      store.logInUser(false)
+    }
+    else { router.push('/') }
   })
-
-  router.push('/')
 }
 
 </script>
@@ -32,6 +33,9 @@ const createPost = (url: string, description: string) => {
     <button class="border border-2" @click="createPost(store.createPost.url, store.createPost.description)">
       Submit
     </button>
+    <div v-if="networkResponse?.error">
+      {{ networkResponse.error }}
+    </div>
   </div>
 </template>
 
