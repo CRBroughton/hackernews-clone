@@ -14,17 +14,17 @@ const router = createRouter({
 
 let storedCookie
 
-if (!VueCookieNext.getCookie('bearer'))
+if (!VueCookieNext.getCookie('Authorization'))
   storedCookie = ''
 else
-  storedCookie = VueCookieNext.getCookie('bearer')
+  storedCookie = VueCookieNext.getCookie('Authorization')
 
 app.use(router).use(VueCookieNext).use(createPinia()).use(urql, {
   url: 'http://localhost:3000',
   fetchOptions: {
     headers: {
       'content-type': 'application/json',
-      'bearer': storedCookie,
+      'Authorization': storedCookie,
     },
   },
 }).mount('#app')

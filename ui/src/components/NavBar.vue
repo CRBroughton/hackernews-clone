@@ -6,7 +6,7 @@ const store = authStore()
 const cookie = useCookie()
 
 const logout = () => {
-  cookie.removeCookie('bearer')
+  cookie.removeCookie('Authorization')
   location.reload()
 }
 </script>

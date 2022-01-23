@@ -7,7 +7,7 @@ import { authStore } from '@/store'
 
 const cookie = useCookie()
 const store = authStore()
-const storedCookie = cookie.getCookie('bearer')
+const storedCookie = cookie.getCookie('Authorization')
 
 const authenticateUser = async() => {
   const authenticateMutation = useMutation(Authenticate)
