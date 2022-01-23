@@ -1,4 +1,4 @@
-import { objectType } from 'nexus'
+import { extendType, nonNull, objectType, stringArg } from 'nexus'
 
 export const User = objectType({
   name: 'User',
@@ -22,6 +22,23 @@ export const User = objectType({
         return context.prisma.user
           .findUnique({ where: { id: parent.id } })
           .votes()
+      },
+    })
+  },
+})
+
+export const userPostQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('testy', {
+      type: 'Post',
+      args: {
+        id: nonNull(stringArg()),
+      },
+      resolve(_parent, args, context) {
+        return context.prisma.post.findMany({
+          where: { postedById: args.id },
+        })
       },
     })
   },
