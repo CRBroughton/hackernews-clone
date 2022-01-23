@@ -8,6 +8,10 @@ export const authStore = defineStore('main', {
         email: '',
         password: '',
       }),
+      createPost: reactive({
+        url: '',
+        description: '',
+      }),
     }
   },
   actions: {
