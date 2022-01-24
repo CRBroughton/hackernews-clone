@@ -123,34 +123,3 @@ export const deletePost = extendType({
     })
   },
 })
-
-export const updatePost = extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.nonNull.field('updatePost', {
-      type: 'Post',
-      args: {
-        id: nonNull(stringArg()),
-        url: nonNull(stringArg()),
-      },
-      async resolve(_parent, args, context) {
-        const { id, url } = args
-        const updatePost = await context.prisma.post.update({
-          where: {
-            id,
-          },
-          data: {
-            url,
-          },
-        })
-        return updatePost
-        // const { id, url } = args
-        // for (const link of links) {
-        //   if (link.id === id)
-        //     link.url = url
-        // }
-        // return args
-      },
-    })
-  },
-})
