@@ -31,6 +31,7 @@ const login = (email: string, password: string) => {
 
     cookie.setCookie('Authorization', result.data.login.token, { expire: '7d', secure: 'true', sameSite: 'strict' })
     store.logInUser(true)
+    store.userId = result.data?.login.user.id
     goToHome(result)
   })
 }

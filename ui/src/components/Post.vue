@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useMutation } from '@urql/vue'
+import { useMutation, useQuery } from '@urql/vue'
 import { Vote } from '@/graphql/mutations'
+import { UserId } from '@/graphql/queries'
 
 interface Props {
   id: string
@@ -9,13 +10,17 @@ interface Props {
   postedBy: {
     name: string
   }
-  voters: number
+  voters: Array<{id: string}>
+  voteCount: number
 }
 
 const props = defineProps<Props>()
 
 const voteMutation = useMutation(Vote)
 const networkResponse = ref()
+
+const result = useQuery(UserId)
+const data = result.data
 
 const voteForPost = (postId: string) => {
   const variables = { postId }
@@ -24,18 +29,23 @@ const voteForPost = (postId: string) => {
       networkResponse.value = result
   })
 }
+let userVoted: boolean
+
+if (data.value)
+  userVoted = props.voters.some(i => i.id.includes(data.value.getUserId))
+
 </script>
 
 <template>
   <div class="my-2 px-2 py-4 text-gray-800 bg-gray-100">
     <div class="flex">
-      <MdiMenuUp class="hover:cursor-pointer" @click="voteForPost(props.id)" />
+      <MdiMenuUp class="hover:cursor-pointer" :class="{ 'text-orange-500': userVoted }" @click="voteForPost(props.id)" />
       <h1 class="text-sm">
         <a :href="props.url">{{ props.description }}</a> <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
       </h1>
     </div>
     <p class="text-xs text-gray-700 ml-1">
-      {{ `${props.voters} points` }} {{ `posted by ${props.postedBy.name}` }}
+      {{ `${props.voteCount} points` }} {{ `posted by ${props.postedBy.name}` }}
     </p>
   </div>
 </template>
