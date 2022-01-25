@@ -3,6 +3,7 @@ export const authStore = defineStore('main', {
   state: () => {
     return {
       loggedIn: false,
+      userId: '',
       credentials: reactive({
         username: '',
         email: '',

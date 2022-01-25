@@ -1,4 +1,4 @@
-import { extendType, nonNull, objectType, stringArg } from 'nexus'
+import { extendType, objectType } from 'nexus'
 
 export const User = objectType({
   name: 'User',
@@ -22,6 +22,23 @@ export const User = objectType({
         return context.prisma.user
           .findUnique({ where: { id: parent.id } })
           .votes()
+      },
+    })
+  },
+})
+
+export const userIdQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.field('getUserId', {
+      type: 'String',
+      resolve(_parent, _args, context) {
+        const userId = context.userId
+
+        if (!userId)
+          throw new Error('This user ID does not exist')
+
+        return userId
       },
     })
   },

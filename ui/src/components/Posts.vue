@@ -21,7 +21,7 @@ const error = result.error
   </div>
   <div v-else class="mt-2">
     <div v-for="post in data.feed.reverse()" :key="post.id" class="text-white px-2">
-      <Post :id="post.id" :description="post.description" :url="post.url" :posted-by="post.postedBy" :voters="post.voters.length" />
+      <Post :id="post.id" :description="post.description" :url="post.url" :posted-by="post.postedBy" :voters="post.voters" :vote-count="post.voters.length" />
     </div>
   </div>
 </template>
