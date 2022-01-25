@@ -17,6 +17,7 @@
     "test:report:web": "http-server coverage/lcov-report -p 8000"
   },
   "dependencies": {
+    "@urql/devtools": "^2.0.3",
     "@urql/exchange-auth": "^0.1.7",
     "@urql/vue": "^0.6.1",
     "@vueuse/core": "^7.4.0",
