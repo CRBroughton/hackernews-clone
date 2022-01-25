@@ -10,7 +10,7 @@ interface Props {
   postedBy: {
     name: string
   }
-  voters: Array<{id: string}>
+  voters?: Array<{id: string}>
   voteCount: number
 }
 
@@ -29,10 +29,14 @@ const voteForPost = (postId: string) => {
       networkResponse.value = result
   })
 }
+
 let userVoted: boolean
 
-if (data.value)
-  userVoted = props.voters.some(i => i.id.includes(data.value.getUserId))
+if (data.value) {
+  if (props.voters?.some(i => i.id.includes(data.value.getUserId)))
+    userVoted = true
+  else userVoted = false
+}
 
 </script>
 
