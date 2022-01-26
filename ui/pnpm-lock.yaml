@@ -7,6 +7,7 @@ specifiers:
   '@cypress/vue': 3.1.0
   '@iconify/json': ^1.1.457
   '@pinia/testing': 0.0.9
+  '@urql/devtools': ^2.0.3
   '@urql/exchange-auth': ^0.1.7
   '@urql/vue': ^0.6.1
   '@vitejs/plugin-vue': 2.0.1
@@ -34,6 +35,7 @@ specifiers:
   windicss: 3.4.2
 
 dependencies:
+  '@urql/devtools': 2.0.3_graphql@16.2.0
   '@urql/exchange-auth': 0.1.7_graphql@16.2.0
   '@urql/vue': 0.6.1_graphql@16.2.0+vue@3.2.26
   '@vueuse/core': 7.5.3_vue@3.2.26
@@ -1796,6 +1798,16 @@ packages:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-typed-document-node/core': 3.1.1_graphql@16.2.0
+      graphql: 16.2.0
+      wonka: 4.0.15
+    dev: false
+
+  /@urql/devtools/2.0.3_graphql@16.2.0:
+    resolution: {integrity: sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==}
+    peerDependencies:
+      '@urql/core': '>= 1.14.0'
+      graphql: '>= 0.11.0'
+    dependencies:
       graphql: 16.2.0
       wonka: 4.0.15
     dev: false

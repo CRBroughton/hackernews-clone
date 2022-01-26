@@ -7,7 +7,7 @@ interface Props {
   id: string
   description: string
   url: string
-  postedBy: {
+  postedBy?: {
     name: string
   }
   voters?: Array<{id: string}>
@@ -21,14 +21,7 @@ const networkResponse = ref()
 
 const result = useQuery(UserId)
 const data = result.data
-
-const voteForPost = (postId: string) => {
-  const variables = { postId }
-  voteMutation.executeMutation(variables).then(async(result) => {
-    if (result.error)
-      networkResponse.value = result
-  })
-}
+const username = props.postedBy?.name ? props.postedBy?.name : 'unknown user'
 
 let userVoted: boolean
 
@@ -38,6 +31,13 @@ if (data.value) {
   else userVoted = false
 }
 
+const voteForPost = (postId: string) => {
+  const variables = { postId }
+  voteMutation.executeMutation(variables).then(async(result) => {
+    if (result.error)
+      networkResponse.value = result
+  })
+}
 </script>
 
 <template>
@@ -49,7 +49,7 @@ if (data.value) {
       </h1>
     </div>
     <p class="text-xs text-gray-700 ml-1">
-      {{ `${props.voteCount} points` }} {{ `posted by ${props.postedBy.name}` }}
+      {{ `${props.voteCount} points` }} {{ `posted by ${username} ` }}
     </p>
   </div>
 </template>
