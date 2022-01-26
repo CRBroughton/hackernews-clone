@@ -4,15 +4,15 @@ dotenv.config()
 
 export const APP_SECRET = process.env.SECRET as string
 
-export interface AuthTokenPayload { // 1
+export interface AuthTokenPayload {
   userId: string
 }
 
-export function decodeAuthHeader(authHeader: String): AuthTokenPayload { // 2
-  const token = authHeader.replace('bearer ', '') // 3
+export function decodeAuthHeader(authHeader: String): AuthTokenPayload {
+  const token = authHeader.replace('bearer ', '')
 
   if (!token)
     throw new Error('No token found')
 
-  return jwt.verify(token, APP_SECRET) as AuthTokenPayload // 4
+  return jwt.verify(token, APP_SECRET) as AuthTokenPayload
 }

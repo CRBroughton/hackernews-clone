@@ -25,10 +25,8 @@ export const AuthMutation = extendType({
         const cookie = decodeAuthHeader(args.cookie)
         const token = cookie.userId
 
-        const verifiedUser = cookie.userId.toString()
-
         const user = await context.prisma.user.findUnique({
-          where: { id: verifiedUser },
+          where: { id: token.toString() },
         })
 
         if (!user)
@@ -76,7 +74,7 @@ export const AuthMutation = extendType({
       },
     })
 
-    t.nonNull.field('signup', { // 1
+    t.nonNull.field('signup', {
       type: 'AuthPayload',
       args: {
         email: nonNull(stringArg()),
@@ -84,7 +82,6 @@ export const AuthMutation = extendType({
         name: nonNull(stringArg()),
       },
       async resolve(_parent, args, context) {
-        // 2
         const password = await bcrypt.hash(args.password, 10)
 
         const email = args.email.toLowerCase()
@@ -101,15 +98,12 @@ export const AuthMutation = extendType({
         if (existingUser || existingUserName)
           throw new Error('Account already created')
 
-        // 3
         const user = await context.prisma.user.create({
           data: { email, name, password },
         })
 
-        // 4
         const token = jwt.sign({ userId: user.id }, APP_SECRET)
 
-        // 5
         return {
           token,
           user,

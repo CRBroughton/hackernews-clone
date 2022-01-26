@@ -1,7 +1,7 @@
 import { extendType, nonNull, objectType, stringArg } from 'nexus'
 import type { User } from '@prisma/client'
 
-export const Vote = objectType({ // 1
+export const Vote = objectType({
   name: 'Vote',
   definition(t) {
     t.nonNull.field('post', { type: 'Post' })
@@ -9,7 +9,7 @@ export const Vote = objectType({ // 1
   },
 })
 
-export const VoteMutation = extendType({ // 2
+export const VoteMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('vote', {
@@ -18,29 +18,25 @@ export const VoteMutation = extendType({ // 2
         postId: nonNull(stringArg()),
       },
       async resolve(_parent, args, context) {
-        const { userId } = context
-        const { postId } = args
-
-        if (!userId) { // 1
+        if (!context.userId)
           throw new Error('Cannot vote without logging in.')
-        }
 
-        const post = await context.prisma.post.update({ // 2
+        const post = await context.prisma.post.update({
           where: {
-            id: postId,
+            id: args.postId,
           },
           data: {
             voters: {
               connect: {
-                id: userId,
+                id: context.userId,
               },
             },
           },
         })
 
-        const user = await context.prisma.user.findUnique({ where: { id: userId } })
+        const user = await context.prisma.user.findUnique({ where: { id: context.userId } })
 
-        return { // 3
+        return {
           post,
           user: user as User,
         }

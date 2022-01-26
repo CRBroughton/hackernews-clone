@@ -6,15 +6,15 @@ export const Post = objectType({
     t.nonNull.string('id')
     t.nullable.string('description')
     t.nonNull.string('url')
-    t.field('postedBy', { // 1
+    t.field('postedBy', {
       type: 'User',
-      resolve(parent, _args, context) { // 2
+      resolve(parent, _args, context) {
         return context.prisma.post
           .findUnique({ where: { id: parent.id } })
           .postedBy()
       },
     })
-    t.nonNull.list.nonNull.field('voters', { // 1
+    t.nonNull.list.nonNull.field('voters', {
       type: 'User',
       resolve(parent, _args, context) {
         return context.prisma.post
@@ -56,14 +56,12 @@ export const PostMutation = extendType({
 
       async resolve(_parent, args, context) {
         const { description, url } = args
-        const { userId } = context
 
-        if (!userId) { // 1
+        if (!context.userId)
           throw new Error('Cannot post without logging in.')
-        }
 
         const user = await context.prisma.user.findUnique({
-          where: { id: userId },
+          where: { id: context.userId },
         })
 
         if (user?.banned)
@@ -73,7 +71,7 @@ export const PostMutation = extendType({
           data: {
             description,
             url,
-            postedBy: { connect: { id: userId } }, // 2
+            postedBy: { connect: { id: context.userId } },
           },
         })
 
@@ -93,8 +91,6 @@ export const deletePost = extendType({
       },
 
       async resolve(_parent, args, context) {
-        const { userId } = context
-
         const getPostedUser = await context.prisma.post.findUnique({
           where: {
             id: args.id,
@@ -104,13 +100,13 @@ export const deletePost = extendType({
           },
         })
 
-        if (!userId)
+        if (!context.userId)
           throw new Error('Cannot post without logging in.')
 
         if (!getPostedUser?.postedById)
           throw new Error('Post does not exist!')
 
-        if (getPostedUser?.postedById !== userId)
+        if (getPostedUser?.postedById !== context.userId)
           throw new Error('Cannot delete posts that you dont own!')
 
         await context.prisma.post.delete({
