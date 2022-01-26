@@ -15,21 +15,21 @@ generator client {
 // 3
 model Post {
   id          String      @id @default(uuid())   // 4
-  createdAt   DateTime @default(now())  // 5
+  createdAt   DateTime    @default(now())  // 5
   description String
   url         String
-  postedBy    User?    @relation(name: "PostedBy", fields: [postedById], references: [id])  // 2
+  postedBy    User?       @relation(name: "PostedBy", fields: [postedById], references: [id])  // 2
   postedById  String?
-  voters      User[]   @relation(name: "Votes")  // 1
+  voters      User[]      @relation(name: "Votes")  // 1
 }
 
 model User {
   id        String      @id @default(uuid())
-  name      String   @unique
-  email     String   @unique
+  name      String      @unique
+  email     String      @unique
   password  String
-  banned    Boolean @default(false)
+  banned    Boolean     @default(false)
   banReason String?
-  posts    Post[] @relation(name: "PostedBy")  // 2
-  votes    Post[] @relation(name: "Votes")  // 1
+  posts     Post[]      @relation(name: "PostedBy")  // 2
+  votes     Post[]      @relation(name: "Votes")  // 1
 }

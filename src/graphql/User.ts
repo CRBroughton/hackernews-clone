@@ -8,10 +8,10 @@ export const User = objectType({
     t.nonNull.string('email')
     t.nonNull.boolean('banned')
     t.string('banReason')
-    t.nonNull.list.nonNull.field('posts', { // 1
+    t.nonNull.list.nonNull.field('posts', {
       type: 'Post',
-      resolve(parent, _args, context) { // 2
-        return context.prisma.user // 3
+      resolve(parent, _args, context) {
+        return context.prisma.user
           .findUnique({ where: { id: parent.id } })
           .posts()
       },
@@ -33,12 +33,10 @@ export const userIdQuery = extendType({
     t.nonNull.field('getUserId', {
       type: 'String',
       resolve(_parent, _args, context) {
-        const userId = context.userId
-
-        if (!userId)
+        if (!context.userId)
           throw new Error('This user ID does not exist')
 
-        return userId
+        return context.userId
       },
     })
   },
@@ -50,10 +48,8 @@ export const userPostQuery = extendType({
     t.nonNull.list.nonNull.field('getUserPosts', {
       type: 'Post',
       resolve(_parent, _args, context) {
-        const { userId } = context
-
         return context.prisma.post.findMany({
-          where: { postedById: userId },
+          where: { postedById: context.userId },
         })
       },
     })
