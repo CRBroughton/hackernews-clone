@@ -19,17 +19,17 @@ const props = defineProps<Props>()
 const voteMutation = useMutation(Vote)
 const networkResponse = ref()
 
-const result = useQuery(UserId)
-const data = result.data
 const username = props.postedBy?.name ? props.postedBy?.name : 'unknown user'
 
-let userVoted: boolean
+const userVoted = ref()
 
-if (data.value) {
-  if (props.voters?.some(i => i.id.includes(data.value.getUserId)))
-    userVoted = true
-  else userVoted = false
-}
+useQuery(UserId).then((result) => {
+  if (result.data.value) {
+    if (props.voters?.some(i => i.id.includes(result.data.value.getUserId)))
+      userVoted.value = true
+    else userVoted.value = false
+  }
+})
 
 const voteForPost = (postId: string) => {
   const variables = { postId }
