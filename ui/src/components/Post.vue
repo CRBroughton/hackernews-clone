@@ -60,7 +60,7 @@ const voteForPost = (postId: string) => {
       />
       <h1 class="text-sm">
         <a :href="props.url">{{ props.description }}</a>
-        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
+        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${props.url})` }}</a>
       </h1>
     </div>
     <p class="text-xs text-gray-700 ml-1">
