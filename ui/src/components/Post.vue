@@ -8,6 +8,7 @@ interface Props {
   description: string
   url: string
   postedBy?: {
+    id: string
     name: string
   }
   voters?: Array<{id: string}>
@@ -22,9 +23,11 @@ const networkResponse = ref()
 const username = props.postedBy?.name ? props.postedBy?.name : 'unknown user'
 
 const userVoted = ref()
+const owner = ref()
 
 useQuery(UserId).then((result) => {
   if (result.data.value) {
+    owner.value = result.data.value.getUserId
     if (props.voters?.some(i => i.id.includes(result.data.value.getUserId)))
       userVoted.value = true
     else userVoted.value = false
@@ -43,7 +46,7 @@ const voteForPost = (postId: string) => {
 <template>
   <div class="my-2 px-2 py-4 text-gray-800 bg-gray-100">
     <div class="flex">
-      <MdiMenuUp class="hover:cursor-pointer" :class="{ 'text-orange-500': userVoted }" @click="voteForPost(props.id)" />
+      <MdiMenuUp v-if="owner !== props.postedBy?.id" class="hover:cursor-pointer" :class="{ 'text-orange-500': userVoted }" @click="voteForPost(props.id)" />
       <h1 class="text-sm">
         <a :href="props.url">{{ props.description }}</a> <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
       </h1>

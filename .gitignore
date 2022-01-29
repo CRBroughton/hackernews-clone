@@ -5,4 +5,3 @@ schema.graphql
 dev.db
 dev.db-journal
 prisma/migrations
-components.d.ts
