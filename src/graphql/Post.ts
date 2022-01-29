@@ -37,8 +37,8 @@ export const PostQuery = extendType({
   definition(t) {
     t.nonNull.list.nonNull.field('feed', {
       type: 'Post',
-      resolve(_parent, _args, context) {
-        return context.prisma.post.findMany()
+      async resolve(_parent, _args, context) {
+        return (await context.prisma.post.findMany()).reverse()
       },
     })
   },
