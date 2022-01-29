@@ -46,10 +46,10 @@ const login = (email: string, password: string) => {
         Submit
       </button>
       <div v-if="networkResponse?.data">
-        <p>Successfully Logged In!</p>
+        <Notification text="Successfully Logged In!" />
       </div>
       <div v-if="networkResponse?.error">
-        {{ networkResponse.error }}
+        <Notification :text="networkResponse.error" />
       </div>
     </div>
   </DefaultLayout>

@@ -46,25 +46,26 @@ const voteForPost = (postId: string) => {
     if (result.error)
       networkResponse.value = result
   })
+  userVoted.value = true
 }
 </script>
 
 <template>
-  <div class="my-2 px-2 py-4 text-gray-800 bg-gray-100">
-    <div class="flex">
-      <MdiMenuUp
-        v-if="showUpvote"
-        class="hover:cursor-pointer"
-        :class="{ 'text-orange-500': userVoted }"
-        @click="voteForPost(props.id)"
-      />
+  <div class="flex my-2 px-2 py-4 text-gray-800 bg-gray-100 items-center">
+    <MdiMenuUp
+      v-if="showUpvote"
+      class="hover:cursor-pointer"
+      :class="{ 'text-orange-500': userVoted }"
+      @click="voteForPost(props.id)"
+    />
+    <div :class="{ 'ml-5': !showUpvote } ">
       <h1 class="text-sm">
         <a :href="props.url">{{ props.description }}</a>
-        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
+        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
       </h1>
+      <p class="text-xs text-gray-700">
+        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }}
+      </p>
     </div>
-    <p class="text-xs text-gray-700 ml-1">
-      {{ `${props.voteCount} points` }} {{ `posted by ${username} ` }}
-    </p>
   </div>
 </template>

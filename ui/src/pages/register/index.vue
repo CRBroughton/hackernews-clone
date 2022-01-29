@@ -39,10 +39,10 @@ const signup = (name: string, email: string, password: string) => {
         Submit
       </button>
       <div v-if="networkResponse?.data">
-        <p>Successfully Signed Up!</p>
+        <Notification text="Successfully Signed Up!" />
       </div>
       <div v-if="networkResponse?.error">
-        {{ networkResponse.error }}
+        <Notification :text="networkResponse.error" />
       </div>
     </div>
   </DefaultLayout>
