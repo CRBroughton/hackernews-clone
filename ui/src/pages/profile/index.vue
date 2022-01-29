@@ -15,7 +15,7 @@ const error = result.error
       Your Posts
     </h1>
     <div v-if="fetching" class="mt-2">
-      Loading...
+      <Loader />
     </div>
     <div v-else-if="error">
       Oh no... {{ error }}

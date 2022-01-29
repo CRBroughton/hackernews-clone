@@ -14,7 +14,7 @@ const error = result.error
 <template>
   <DefaultLayout>
     <div v-if="fetching" class="mt-2">
-      Loading...
+      <Loader />
     </div>
     <div v-else-if="error">
       Oh no... {{ error }}
