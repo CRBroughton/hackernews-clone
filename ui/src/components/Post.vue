@@ -46,6 +46,7 @@ const voteForPost = (postId: string) => {
     if (result.error)
       networkResponse.value = result
   })
+  userVoted.value = true
 }
 </script>
 
