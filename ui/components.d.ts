@@ -8,7 +8,6 @@ declare module 'vue' {
     MdiMenuUp: typeof import('~icons/mdi/menu-up')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     Post: typeof import('./src/components/Post.vue')['default']
-    Posts: typeof import('./src/components/Posts.vue')['default']
   }
 }
 

@@ -2,12 +2,14 @@
 import { useMutation, useQuery } from '@urql/vue'
 import { Vote } from '@/graphql/mutations'
 import { UserId } from '@/graphql/queries'
+import { authStore } from '@/store'
 
 interface Props {
   id: string
   description: string
   url: string
   postedBy?: {
+    id: string
     name: string
   }
   voters?: Array<{id: string}>
@@ -15,21 +17,28 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const store = authStore()
 
 const voteMutation = useMutation(Vote)
-const networkResponse = ref()
 
-const result = useQuery(UserId)
-const data = result.data
+const networkResponse = ref()
+const userVoted = ref()
+const owner = ref()
+
 const username = props.postedBy?.name ? props.postedBy?.name : 'unknown user'
 
-let userVoted: boolean
+const showUpvote = computed(() => {
+  return owner.value !== props.postedBy?.id && store.loggedIn
+})
 
-if (data.value) {
-  if (props.voters?.some(i => i.id.includes(data.value.getUserId)))
-    userVoted = true
-  else userVoted = false
-}
+useQuery(UserId).then((result) => {
+  if (result.data.value) {
+    owner.value = result.data.value.getUserId
+    if (props.voters?.some(i => i.id.includes(result.data.value.getUserId)))
+      userVoted.value = true
+    else userVoted.value = false
+  }
+})
 
 const voteForPost = (postId: string) => {
   const variables = { postId }
@@ -43,9 +52,15 @@ const voteForPost = (postId: string) => {
 <template>
   <div class="my-2 px-2 py-4 text-gray-800 bg-gray-100">
     <div class="flex">
-      <MdiMenuUp class="hover:cursor-pointer" :class="{ 'text-orange-500': userVoted }" @click="voteForPost(props.id)" />
+      <MdiMenuUp
+        v-if="showUpvote"
+        class="hover:cursor-pointer"
+        :class="{ 'text-orange-500': userVoted }"
+        @click="voteForPost(props.id)"
+      />
       <h1 class="text-sm">
-        <a :href="props.url">{{ props.description }}</a> <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
+        <a :href="props.url">{{ props.description }}</a>
+        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ `(${props.url})` }}</a>
       </h1>
     </div>
     <p class="text-xs text-gray-700 ml-1">

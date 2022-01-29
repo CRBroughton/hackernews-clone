@@ -6,6 +6,7 @@ export const homePage = {
                   description
                   url
                   postedBy {
+                  id
                   name
                   }
                   voters {
@@ -24,6 +25,7 @@ export const getUserPosts = {
               description
               url
               postedBy {
+              id
               name
               }
               voters {
