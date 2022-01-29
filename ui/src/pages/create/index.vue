@@ -35,7 +35,7 @@ const createPost = (url: string, description: string) => {
         Submit
       </button>
       <div v-if="networkResponse?.error">
-        {{ networkResponse.error }}
+        <Notification :text="networkResponse.error" />
       </div>
     </div>
   </DefaultLayout>
