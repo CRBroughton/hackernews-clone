@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 interface Props {
-  text: string
+  text: string | object
   loader?: boolean
 }
 const props = defineProps<Props>()

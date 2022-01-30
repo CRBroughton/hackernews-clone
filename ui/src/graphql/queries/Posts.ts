@@ -25,6 +25,7 @@ export const getUserPosts = {
               id
               description
               url
+              topic
               postedBy {
               id
               name

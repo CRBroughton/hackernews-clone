@@ -19,6 +19,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const store = authStore()
+const router = useRouter()
 
 const voteMutation = useMutation(Vote)
 
@@ -49,6 +50,10 @@ const voteForPost = (postId: string) => {
   })
   userVoted.value = true
 }
+
+const goToTopic = (topic: string) => {
+  router.push(`/topic/${encodeURIComponent(topic)}`)
+}
 </script>
 
 <template>
@@ -66,9 +71,9 @@ const voteForPost = (postId: string) => {
       </h1>
       <p class="text-xs text-gray-700">
         {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on
-        <router-link to="/profile">
+        <button class="hover:underline hover:cursor-pointer" @click="goToTopic(props.topic)">
           {{ props.topic }}
-        </router-link>
+        </button>
       </p>
     </div>
   </div>
