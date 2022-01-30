@@ -13,11 +13,10 @@ const createPost = (url: string, topic: string, description: string) => {
   const variables = { url, topic, description }
 
   createMutation.executeMutation(variables).then(async(result) => {
-    if (result.error) {
+    if (result.error)
       networkResponse.value = result
-      store.logInUser(false)
-    }
-    else { router.push('/') }
+
+    else router.push('/')
   })
 }
 

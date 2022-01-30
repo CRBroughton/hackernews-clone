@@ -74,7 +74,14 @@ export const PostMutation = extendType({
       },
 
       async resolve(_parent, args, context) {
-        const { description, url, topic } = args
+        const { description, url } = args
+        let topic = args.topic
+
+        if (!args.description || !args.url)
+          throw new Error('Missing a required field!')
+
+        if (!args.topic)
+          topic = 'General'
 
         if (!context.userId)
           throw new Error('Cannot post without logging in.')
