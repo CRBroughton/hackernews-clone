@@ -19,6 +19,7 @@ model Post {
   postedBy    User?       @relation(name: "PostedBy", fields: [postedById], references: [id])
   postedById  String?
   voters      User[]      @relation(name: "Votes")
+  topic       String
 }
 
 model User {
