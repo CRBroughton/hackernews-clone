@@ -10,10 +10,36 @@ To install dependances, run:
 pnpm i && cd ui && pnpm i && cd ..
 ```
 
+Then copy the `.env.example` file to `.env` and customise the variables.
+
+Then run:
+
+```
+npx prisma generate
+```
+
+Finally, run the below to build the Docker containers:
+
+```
+docker-compose up -d && cd ui && docker-compose up -d && cd ..
+```
+
 To start database and run existing migrations
 
 ```
 npx prisma migrate deploy
+```
+
+To test the database, start Altair and run the 'Query Database' query
+, which should return an empty array.
+
+
+## Common Commands
+
+To seed the database, run:
+
+```
+npx prisma migrate reset
 ```
 
 To create a new migration:
