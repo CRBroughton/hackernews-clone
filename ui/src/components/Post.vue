@@ -65,7 +65,10 @@ const voteForPost = (postId: string) => {
         <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
       </h1>
       <p class="text-xs text-gray-700">
-        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on  {{ props.topic }}
+        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on
+        <router-link to="/profile">
+          {{ props.topic }}
+        </router-link>
       </p>
     </div>
   </div>
