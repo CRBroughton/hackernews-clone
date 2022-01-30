@@ -1,9 +1,11 @@
-# Typescript Apollo Tutorial
+# Hackernews clone
 
-To install deps:
+This is a basic Hackernews clone
+
+To install dependances, run:
 
 ```
-pnpm i
+pnpm i && cd ui && pnpm i && cd ..
 ```
 
 To start database and run existing migrations
