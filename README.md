@@ -18,7 +18,7 @@ Then run:
 npx prisma generate
 ```
 
-Finally, run the below to build the Docker containers:
+Then run the below to build the Docker containers:
 
 ```
 docker-compose up -d && cd ui && docker-compose up -d && cd ..
@@ -36,7 +36,7 @@ To test the database, start Altair and run the 'Query Database' query
 
 ## Common Commands
 
-To seed the database, run:
+To seed and reset the database, run:
 
 ```
 npx prisma migrate reset
