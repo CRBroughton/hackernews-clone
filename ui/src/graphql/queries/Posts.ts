@@ -5,6 +5,7 @@ export const homePage = {
                   id
                   description
                   url
+                  topic
                   postedBy {
                   id
                   name

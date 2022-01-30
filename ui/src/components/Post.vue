@@ -8,6 +8,7 @@ interface Props {
   id: string
   description: string
   url: string
+  topic: string
   postedBy?: {
     id: string
     name: string
@@ -64,7 +65,7 @@ const voteForPost = (postId: string) => {
         <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
       </h1>
       <p class="text-xs text-gray-700">
-        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }}
+        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on  {{ props.topic }}
       </p>
     </div>
   </div>
