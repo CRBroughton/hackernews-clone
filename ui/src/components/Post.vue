@@ -8,6 +8,7 @@ interface Props {
   id: string
   description: string
   url: string
+  topic: string
   postedBy?: {
     id: string
     name: string
@@ -18,6 +19,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const store = authStore()
+const router = useRouter()
 
 const voteMutation = useMutation(Vote)
 
@@ -48,6 +50,10 @@ const voteForPost = (postId: string) => {
   })
   userVoted.value = true
 }
+
+const goToTopic = (topic: string) => {
+  router.push(`/topic/${encodeURIComponent(topic)}`)
+}
 </script>
 
 <template>
@@ -64,7 +70,10 @@ const voteForPost = (postId: string) => {
         <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
       </h1>
       <p class="text-xs text-gray-700">
-        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }}
+        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on
+        <button class="hover:underline hover:cursor-pointer" @click="goToTopic(props.topic)">
+          {{ props.topic }}
+        </button>
       </p>
     </div>
   </div>

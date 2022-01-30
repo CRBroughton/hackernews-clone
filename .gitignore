@@ -4,4 +4,3 @@ schema.graphql
 .env
 dev.db
 dev.db-journal
-prisma/migrations

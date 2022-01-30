@@ -6,6 +6,7 @@ export const Post = objectType({
     t.nonNull.string('id')
     t.nullable.string('description')
     t.nonNull.string('url')
+    t.nonNull.string('topic')
     t.field('postedBy', {
       type: 'User',
       resolve(parent, _args, context) {
@@ -44,6 +45,23 @@ export const PostQuery = extendType({
   },
 })
 
+export const TopicQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('getTopicPosts', {
+      type: 'Post',
+      args: {
+        topic: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, context) {
+        return (await context.prisma.post.findMany({
+          where: { topic: args.topic },
+        })).reverse()
+      },
+    })
+  },
+})
+
 export const PostMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -52,10 +70,11 @@ export const PostMutation = extendType({
       args: {
         description: nonNull(stringArg()),
         url: nonNull(stringArg()),
+        topic: nonNull(stringArg()),
       },
 
       async resolve(_parent, args, context) {
-        const { description, url } = args
+        const { description, url, topic } = args
 
         if (!context.userId)
           throw new Error('Cannot post without logging in.')
@@ -71,6 +90,7 @@ export const PostMutation = extendType({
           data: {
             description,
             url,
+            topic,
             postedBy: { connect: { id: context.userId } },
           },
         })

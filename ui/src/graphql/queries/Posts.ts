@@ -5,6 +5,7 @@ export const homePage = {
                   id
                   description
                   url
+                  topic
                   postedBy {
                   id
                   name
@@ -24,6 +25,7 @@ export const getUserPosts = {
               id
               description
               url
+              topic
               postedBy {
               id
               name
