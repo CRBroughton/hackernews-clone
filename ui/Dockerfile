@@ -1,4 +1,4 @@
-FROM node:15.12.0
+FROM node:16.0.0
 
 LABEL author="Craig Broughton"
 LABEL author.email="CRBroughton@posteo.uk"
@@ -10,7 +10,7 @@ RUN chmod +x /entrypoint.sh
 
 ADD . .
 
-RUN npm i -g pnpm && pnpm i
+RUN npm i --legacy-peer-deps
 
 ENTRYPOINT ["/entrypoint.sh"]
 
