@@ -45,6 +45,23 @@ export const PostQuery = extendType({
   },
 })
 
+export const TopicQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('getTopicPosts', {
+      type: 'Post',
+      args: {
+        topic: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, context) {
+        return (await context.prisma.post.findMany({
+          where: { topic: args.topic },
+        })).reverse()
+      },
+    })
+  },
+})
+
 export const PostMutation = extendType({
   type: 'Mutation',
   definition(t) {
