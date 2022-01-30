@@ -1,6 +1,6 @@
 export const Create = `
-    mutation ($url: String!, $description: String!) {   
-        post (url: $url, description: $description) {      
+    mutation ($url: String!, $topic: String! $description: String!) {   
+        post (url: $url, topic: $topic, description: $description) {      
             url
         }
     }

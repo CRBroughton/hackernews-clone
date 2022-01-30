@@ -9,8 +9,8 @@ const store = authStore()
 const createMutation = useMutation(Create)
 const networkResponse = ref()
 
-const createPost = (url: string, description: string) => {
-  const variables = { url, description }
+const createPost = (url: string, topic: string, description: string) => {
+  const variables = { url, topic, description }
 
   createMutation.executeMutation(variables).then(async(result) => {
     if (result.error) {
@@ -30,8 +30,10 @@ const createPost = (url: string, description: string) => {
         Create Post
       </h1>
       <input v-model="store.createPost.description" class="border border-2" type="text" placeholder="Description">
+      <input v-model="store.createPost.topic" class="border border-2" type="text" placeholder="Topic">
       <input v-model="store.createPost.url" class="border border-2" type="text" placeholder="URL">
-      <button class="border border-2" @click="createPost(store.createPost.url, store.createPost.description)">
+
+      <button class="border border-2" @click="createPost(store.createPost.url, store.createPost.topic, store.createPost.description)">
         Submit
       </button>
       <div v-if="networkResponse?.error">

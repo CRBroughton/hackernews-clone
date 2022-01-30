@@ -11,6 +11,7 @@ export const authStore = defineStore('main', {
       }),
       createPost: reactive({
         url: '',
+        topic: '',
         description: '',
       }),
     }
