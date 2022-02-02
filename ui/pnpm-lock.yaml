@@ -12,6 +12,8 @@ specifiers:
   '@urql/vue': ^0.6.1
   '@vitejs/plugin-vue': 2.0.1
   '@vue/test-utils': ^2.0.0-rc.16
+  '@vuelidate/core': ^2.0.0-alpha.34
+  '@vuelidate/validators': ^2.0.0-alpha.26
   '@vueuse/core': ^7.4.0
   cypress: 9.2.1
   eslint: 8.6.0
@@ -38,6 +40,8 @@ dependencies:
   '@urql/devtools': 2.0.3_graphql@16.2.0
   '@urql/exchange-auth': 0.1.7_graphql@16.2.0
   '@urql/vue': 0.6.1_graphql@16.2.0+vue@3.2.26
+  '@vuelidate/core': 2.0.0-alpha.34_vue@3.2.26
+  '@vuelidate/validators': 2.0.0-alpha.26_vue@3.2.26
   '@vueuse/core': 7.5.3_vue@3.2.26
   graphql: 16.2.0
   pinia: 2.0.9_typescript@4.5.4+vue@3.2.26
@@ -2000,6 +2004,24 @@ packages:
     dependencies:
       vue: 3.2.26
     dev: true
+
+  /@vuelidate/core/2.0.0-alpha.34_vue@3.2.26:
+    resolution: {integrity: sha512-8SHViBA+bBaXGH8UwcdGG7vEQ8mG8rhtsddJiq9Abz9YvzWxFxd8spAhe9ggfCtyRuvwCCpPbxx63NOGThVZkQ==}
+    dependencies:
+      vue-demi: 0.12.0_vue@3.2.26
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vuelidate/validators/2.0.0-alpha.26_vue@3.2.26:
+    resolution: {integrity: sha512-O53AU/dGMMOEPMC6bqhs9JvJAz03z0lLxIDq1tL8bWZylzRWeuF9a2sERxy82t2MnQ+ag15tUpTFpTbaYBm9tg==}
+    dependencies:
+      vue-demi: 0.12.0_vue@3.2.26
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /@vueuse/core/7.5.3_vue@3.2.26:
     resolution: {integrity: sha512-D9j5ymHFMFRXQqCp0yZJkf/bvBGiz0MrKUa364p+L8dMyd5zyq2K1JmHyvoBd4xbTFRfmQ1h878u6YE5LCkDVQ==}

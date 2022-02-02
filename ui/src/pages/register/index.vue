@@ -2,6 +2,9 @@
 import { useMutation } from '@urql/vue'
 import type { OperationResult } from '@urql/vue'
 import { promiseTimeout } from '@vueuse/core'
+import { useVuelidate } from '@vuelidate/core'
+import { email, required } from '@vuelidate/validators'
+
 import { Signup } from '@/graphql/mutations'
 import { authStore } from '@/store'
 
@@ -17,7 +20,21 @@ const goToHome = async(result: OperationResult<any, any>) => {
   router.push('/')
 }
 
+const rules = {
+  credentials: {
+    username: { required },
+    email: { required, email },
+    password: { required },
+  },
+}
+
+const v$ = useVuelidate(rules, store)
+
 const signup = (name: string, email: string, password: string) => {
+  v$.value.$touch()
+  if (v$.value.$error)
+    throw new Error('test')
+
   const variables = { name, email, password }
   signupMutation.executeMutation(variables).then(async(result) => {
     if (result.error) {
