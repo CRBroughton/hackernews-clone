@@ -3,7 +3,7 @@ import { useMutation } from '@urql/vue'
 import type { OperationResult } from '@urql/vue'
 import { promiseTimeout } from '@vueuse/core'
 import { useVuelidate } from '@vuelidate/core'
-import { email, required } from '@vuelidate/validators'
+import { email, minLength, required } from '@vuelidate/validators'
 
 import { Signup } from '@/graphql/mutations'
 import { authStore } from '@/store'
@@ -24,16 +24,21 @@ const rules = {
   credentials: {
     username: { required },
     email: { required, email },
-    password: { required },
+    password: { required, minLength: minLength(8) },
   },
 }
 
 const v$ = useVuelidate(rules, store)
 
-const signup = (name: string, email: string, password: string) => {
-  v$.value.$touch()
-  if (v$.value.$error)
-    throw new Error('test')
+const errors = computed (() => {
+  networkResponse.value = ''
+  return v$.value.$errors
+})
+
+const signup = async(name: string, email: string, password: string) => {
+  const isFormCorrect = await v$.value.$validate()
+
+  if (!isFormCorrect) return
 
   const variables = { name, email, password }
   signupMutation.executeMutation(variables).then(async(result) => {
@@ -45,7 +50,6 @@ const signup = (name: string, email: string, password: string) => {
   })
 }
 </script>
-
 <template>
   <DefaultLayout>
     <div class="flex flex-col gap-1 w-60 p-2">
@@ -55,11 +59,16 @@ const signup = (name: string, email: string, password: string) => {
       <button class="border border-2" @click.prevent="signup(store.credentials.username, store.credentials.email, store.credentials.password)">
         Submit
       </button>
-      <div v-if="networkResponse?.data">
-        <Notification text="Successfully Signed Up!" />
-      </div>
-      <div v-if="networkResponse?.error">
-        <Notification :text="networkResponse.error" />
+      <div class="flex flex-col fixed bottom-0 right-0">
+        <div v-if="networkResponse?.data">
+          <Notification text="Successfully Signed Up!" />
+        </div>
+        <div v-if="networkResponse?.error">
+          <Notification :text="networkResponse.error" />
+        </div>
+        <div v-for="error in errors" :key="error.$uid">
+          <Notification :text="`${error.$property} ${error.$message.toString().slice(5)}`" />
+        </div>
       </div>
     </div>
   </DefaultLayout>
