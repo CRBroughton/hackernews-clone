@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
     "generate": "ts-node --transpile-only src/schema.ts",
+    "pnpm:check": "NPM_CHECK_INSTALLER=pnpm npm-check -u",
     "docker": "nodemon --config nodemon.json src/index.ts"
   },
   "prisma": {
@@ -21,6 +22,7 @@
     "apollo-server-core": "^3.6.1",
     "eslint": "8.6.0",
     "nodemon": "^2.0.15",
+    "npm-check": "^5.9.2",
     "prisma": "^3.5.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
