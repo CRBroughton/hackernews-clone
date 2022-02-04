@@ -45,11 +45,13 @@ const login = (email: string, password: string) => {
       <button class="border border-2" @click.prevent="login(store.credentials.email, store.credentials.password)">
         Submit
       </button>
-      <div v-if="networkResponse?.data">
-        <Notification text="Successfully Logged In!" />
-      </div>
-      <div v-if="networkResponse?.error">
-        <Notification :text="networkResponse.error" />
+      <div class="flex flex-col fixed bottom-0 right-0">
+        <div v-if="networkResponse?.data">
+          <Notification text="Successfully Logged In!" />
+        </div>
+        <div v-if="networkResponse?.error">
+          <Notification :text="networkResponse.error" />
+        </div>
       </div>
     </div>
   </DefaultLayout>

@@ -4,3 +4,4 @@ schema.graphql
 .env
 dev.db
 dev.db-journal
+docs
