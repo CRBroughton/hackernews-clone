@@ -60,7 +60,7 @@ const createPost = async(url: string, topic: string, description: string) => {
           <Notification :text="networkResponse.error" />
         </div>
         <div v-for="error in errors" :key="error.$uid">
-          <Notification :text="`${error.$property} ${error.$message.toString()}`" />
+          <Notification :text="`${error.$property} - ${error.$message.toString().toLowerCase()}`" />
         </div>
       </div>
     </div>
