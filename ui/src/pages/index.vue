@@ -20,7 +20,7 @@ const error = result.error
       <Notification loader text="Oh no! An error occured!" />
     </div>
     <div v-else-if="!data.feed.length">
-      <Notification text="There are not posts!" />
+      <Notification text="There are no posts!" />
     </div>
     <div v-else class="mt-2">
       <div v-for="post in data.feed" :key="post.id" class="text-white px-2">
