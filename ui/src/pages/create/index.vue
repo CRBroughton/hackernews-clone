@@ -57,7 +57,7 @@ const createPost = async(url: string, topic: string, description: string) => {
       </button>
       <div class="flex flex-col fixed bottom-0 right-0">
         <div v-if="networkResponse?.error">
-          <Notification :text="networkResponse.error" />
+          <Notification :text="networkResponse.error.toString().slice(9)" />
         </div>
         <div v-for="error in errors" :key="error.$uid">
           <Notification :text="`${error.$property} - ${error.$message.toString().toLowerCase()}`" />
