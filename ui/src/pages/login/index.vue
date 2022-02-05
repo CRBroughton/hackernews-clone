@@ -70,7 +70,7 @@ const login = async(email: string, password: string) => {
           <Notification text="Successfully Logged In!" />
         </div>
         <div v-if="networkResponse?.error">
-          <Notification :text="networkResponse.error" />
+          <Notification :text="networkResponse.error.toString().slice(9)" />
         </div>
         <div v-for="error in errors" :key="error.$uid">
           <Notification :text="`${error.$property} ${error.$message.toString().slice(5)}`" />
