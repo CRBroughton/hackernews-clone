@@ -3,6 +3,8 @@ import type { OperationResult } from '@urql/vue'
 import { useMutation } from '@urql/vue'
 import { useCookie } from 'vue-cookie-next'
 import { promiseTimeout } from '@vueuse/core'
+import { email, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 import { Login } from '@/graphql/mutations'
 import { authStore } from '@/store'
 
@@ -11,6 +13,20 @@ const router = useRouter()
 const store = authStore()
 
 const networkResponse = ref()
+
+const rules = {
+  credentials: {
+    email: { required, email },
+    password: { required },
+  },
+}
+
+const v$ = useVuelidate(rules, store)
+
+const errors = computed (() => {
+  networkResponse.value = ''
+  return v$.value.$errors
+})
 
 const loginMutation = useMutation(Login)
 
@@ -21,7 +37,11 @@ const goToHome = async(result: OperationResult<any, any>) => {
   location.reload()
 }
 
-const login = (email: string, password: string) => {
+const login = async(email: string, password: string) => {
+  const isFormCorrect = await v$.value.$validate()
+
+  if (!isFormCorrect) return
+
   const variables = { email, password }
   loginMutation.executeMutation(variables).then(async(result) => {
     if (result.error) {
@@ -50,7 +70,10 @@ const login = (email: string, password: string) => {
           <Notification text="Successfully Logged In!" />
         </div>
         <div v-if="networkResponse?.error">
-          <Notification :text="networkResponse.error" />
+          <Notification :text="networkResponse.error.toString().slice(9)" />
+        </div>
+        <div v-for="error in errors" :key="error.$uid">
+          <Notification :text="`${error.$property} ${error.$message.toString().slice(5)}`" />
         </div>
       </div>
     </div>

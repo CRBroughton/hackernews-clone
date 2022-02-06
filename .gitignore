@@ -5,3 +5,5 @@ schema.graphql
 dev.db
 dev.db-journal
 docs
+ui/coverage
+ui/.nyc_output
