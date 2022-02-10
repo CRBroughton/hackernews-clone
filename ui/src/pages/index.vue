@@ -1,12 +1,12 @@
 
 <script setup lang="ts">
-import { useQuery } from '@urql/vue'
+import { useQuery } from 'villus'
 import DefaultLayout from '@/components/DefaultLayout.vue'
 import { homePage } from '@/graphql/queries'
 
 const result = useQuery(homePage)
 
-const fetching = result.fetching
+const fetching = result.isFetching
 const data = result.data
 const error = result.error
 </script>

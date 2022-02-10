@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
 import 'virtual:windi.css'
 import { createPinia } from 'pinia'
+import { defaultPlugins, useClient } from 'villus'
 import { createRouter, createWebHistory } from 'vue-router'
-import urql, { defaultExchanges } from '@urql/vue'
-import { devtoolsExchange } from '@urql/devtools'
 import { VueCookieNext } from 'vue-cookie-next'
 import App from './App.vue'
 import routes from '~pages'
@@ -15,20 +14,21 @@ const router = createRouter({
   routes,
 })
 
-let storedCookie
+let storedCookie: string
 
 if (!VueCookieNext.getCookie('Authorization'))
   storedCookie = ''
 else
   storedCookie = VueCookieNext.getCookie('Authorization')
 
-app.use(router).use(VueCookieNext).use(createPinia()).use(urql, {
+function authPlugin({ opContext }) {
+  console.log(opContext)
+  opContext.headers.Authorization = storedCookie
+}
+
+const villus = useClient({
   url: 'http://localhost:3000',
-  exchanges: [devtoolsExchange, ...defaultExchanges],
-  fetchOptions: {
-    headers: {
-      'content-type': 'application/json',
-      'Authorization': storedCookie,
-    },
-  },
-}).mount('#app')
+  use: [authPlugin, ...defaultPlugins()],
+})
+
+app.use(router).use(VueCookieNext).use(createPinia()).use(villus).mount('#app')
