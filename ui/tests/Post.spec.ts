@@ -26,7 +26,7 @@ const bootstrap = () => {
           url: 'http://localhost:3000',
         }),
       },
-      plugins: [useRouter()],
+      plugins: [useRouter],
       // plugins: [useRouter(), createTestingPinia()],
 
     },
