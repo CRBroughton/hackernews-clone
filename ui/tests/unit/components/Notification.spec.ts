@@ -1,4 +1,4 @@
-import { mount } from '@cypress/vue'
+import { mount } from '@vue/test-utils'
 import Notification from '@/components/Notification.vue'
 import 'virtual:windi.css'
 
@@ -9,33 +9,36 @@ describe('Notification Component', () => {
   it('renders a notification prop message', () => {
     const text = 'An error has occurred'
 
-    mount(Notification, {
-      propsData: {
+    const wrapper = mount(Notification, {
+      props: {
         text,
       },
     })
-    cy.get('[data-cy=notification]').contains(text)
+
+    const notification = wrapper.get('[data-cy=notification]')
+
+    expect(notification.text()).toContain(text)
   })
   it('renders a spinner when in the loading state', () => {
-    const text = 'An error has occurred'
+    const text = 'Loading...'
 
-    mount(Notification, {
-      propsData: {
+    const wrapper = mount(Notification, {
+      props: {
         text,
         loader: true,
       },
     })
-    cy.get('[data-cy=loader]').should('exist')
+    expect(wrapper.find('[data-cy=loader]').exists()).toBe(true)
   })
   it('doesnt render a spinner when not in the loading state', () => {
-    const text = 'An error has occurred'
+    const text = 'Finished Loading!'
 
-    mount(Notification, {
-      propsData: {
+    const wrapper = mount(Notification, {
+      props: {
         text,
         loader: false,
       },
     })
-    cy.get('[data-cy=loader]').should('not.exist')
+    expect(wrapper.find('[data-cy=loader]').exists()).toBe(false)
   })
 })

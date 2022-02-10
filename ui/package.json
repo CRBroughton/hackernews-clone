@@ -9,12 +9,9 @@
     "lint:check": "eslint \"**/*.{vue,ts,js}\"",
     "lint:fix": "eslint \"**/*.{vue,ts,js}\" --fix",
     "serve": "vite preview",
-    "test:unit": "npx cypress run-ct",
-    "test:unit:web": "npx cypress open-ct",
-    "test:e2e": "cypress run",
-    "test:e2e:web": "cypress open",
-    "test:report": "npx nyc report",
-    "test:report:web": "http-server coverage/lcov-report -p 8000"
+    "test:watch": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@urql/devtools": "^2.0.3",
@@ -31,15 +28,12 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.16.0",
-    "@cypress/code-coverage": "^3.9.12",
-    "@cypress/vite-dev-server": "2.2.2",
-    "@cypress/vue": "3.1.0",
     "@iconify/json": "^1.1.457",
     "@pinia/testing": "0.0.9",
     "@vitejs/plugin-vue": "2.0.1",
     "@vue/test-utils": "^2.0.0-rc.16",
-    "cypress": "9.2.1",
     "eslint": "8.6.0",
+    "happy-dom": "^2.31.1",
     "http-server": "14.1.0",
     "npm-check": "^5.9.2",
     "sass": "1.48.0",
@@ -51,6 +45,7 @@
     "vite-plugin-istanbul": "^2.3.0",
     "vite-plugin-pages": "0.20.0",
     "vite-plugin-windicss": "1.6.2",
+    "vitest": "^0.3.2",
     "vue-tsc": "0.30.2",
     "windicss": "3.4.2"
   }
