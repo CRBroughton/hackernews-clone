@@ -28,7 +28,6 @@
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    
     "@antfu/eslint-config": "0.16.0",
     "@iconify/json": "^1.1.457",
     "@pinia/testing": "0.0.9",
