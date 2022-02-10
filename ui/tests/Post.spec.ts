@@ -33,11 +33,12 @@ const bootstrap = () => {
   })
 }
 
+beforeEach(() => {
+  setActivePinia(createPinia())
+  injectRouterMock(router)
+})
+
 describe('Notification Component', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-    injectRouterMock(router)
-  })
   it('renders a notification prop message', () => {
     const wrapper = bootstrap()
 

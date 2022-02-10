@@ -2,10 +2,20 @@ import { mount } from '@vue/test-utils'
 import Notification from '@/components/Notification.vue'
 import 'virtual:windi.css'
 
-describe('Notification Component', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
+const boostrap = (text: string, loader: boolean) => {
+  return mount(Notification, {
+    props: {
+      text,
+      loader,
+    },
   })
+}
+
+beforeEach(() => {
+  setActivePinia(createPinia())
+})
+
+describe('Notification Component', () => {
   it('renders a notification prop message', () => {
     const text = 'An error has occurred'
 
@@ -22,23 +32,15 @@ describe('Notification Component', () => {
   it('renders a spinner when in the loading state', () => {
     const text = 'Loading...'
 
-    const wrapper = mount(Notification, {
-      props: {
-        text,
-        loader: true,
-      },
-    })
+    const wrapper = boostrap(text, true)
+
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(true)
   })
   it('doesnt render a spinner when not in the loading state', () => {
     const text = 'Finished Loading!'
 
-    const wrapper = mount(Notification, {
-      props: {
-        text,
-        loader: false,
-      },
-    })
+    const wrapper = boostrap(text, false)
+
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(false)
   })
 })
