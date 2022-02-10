@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMutation, useQuery } from '@urql/vue'
+import { useMutation, useQuery } from 'villus'
 import { Vote } from '@/graphql/mutations'
 import { UserId } from '@/graphql/queries'
 import { authStore } from '@/store'
@@ -42,14 +42,14 @@ useQuery(UserId).then((result) => {
   }
 })
 
-const voteForPost = (postId: string) => {
-  const variables = { postId }
-  voteMutation.executeMutation(variables).then(async(result) => {
-    if (result.error)
-      networkResponse.value = result
-  })
-  userVoted.value = true
-}
+// const voteForPost = (postId: string) => {
+//   const variables = { postId }
+//   voteMutation.executeMutation(variables).then(async(result) => {
+//     if (result.error)
+//       networkResponse.value = result
+//   })
+//   userVoted.value = true
+// }
 
 const goToTopic = (topic: string) => {
   router.push(`/topic/${encodeURIComponent(topic)}`)
@@ -66,7 +66,7 @@ const goToTopic = (topic: string) => {
     />
     <div :class="{ 'ml-5': !showUpvote } ">
       <h1 class="text-sm">
-        <a :href="props.url">{{ props.description }}</a>
+        <a data-test="description" :href="props.url">{{ props.description }}</a>
         <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
       </h1>
       <p class="text-xs text-gray-700">
