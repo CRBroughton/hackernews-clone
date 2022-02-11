@@ -32,16 +32,12 @@ const errors = computed (() => {
   return v$.value.$errors
 })
 
-const variables = {
-  name: store.credentials.username,
-  email: store.credentials.email,
-  password: store.credentials.password,
-}
-
 const { execute } = useMutation(Signup)
 
-const signup = async() => {
+const signup = async(name: string, email: string, password: string) => {
   const isFormCorrect = await v$.value.$validate()
+
+  const variables = { name, email, password }
 
   if (!isFormCorrect) return
 
@@ -60,7 +56,7 @@ const signup = async() => {
       <input v-model="store.credentials.username" class="border border-2" type="text" placeholder="username">
       <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
       <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
-      <button class="border border-2" @click.prevent="signup()">
+      <button class="border border-2" @click.prevent="signup(store.credentials.username, store.credentials.email, store.credentials.password)">
         Submit
       </button>
       <div class="flex flex-col fixed bottom-0 right-0">
