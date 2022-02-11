@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import 'virtual:windi.css'
 import { createPinia } from 'pinia'
-import { defaultPlugins, useClient } from 'villus'
+import { createClient, defaultPlugins } from 'villus'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VueCookieNext } from 'vue-cookie-next'
 import App from './App.vue'
@@ -22,13 +22,12 @@ else
   storedCookie = VueCookieNext.getCookie('Authorization')
 
 function authPlugin({ opContext }) {
-  console.log(opContext)
   opContext.headers.Authorization = storedCookie
 }
 
-const villus = useClient({
+const client = createClient({
   url: 'http://localhost:3000',
   use: [authPlugin, ...defaultPlugins()],
 })
 
-app.use(router).use(VueCookieNext).use(createPinia()).use(villus).mount('#app')
+app.use(router).use(VueCookieNext).use(createPinia()).use(client).mount('#app')
