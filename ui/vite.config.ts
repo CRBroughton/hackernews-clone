@@ -38,7 +38,9 @@ export default defineConfig({
         'vue',
         'vue-router',
         'pinia',
+        'vitest',
       ],
+      dts: true,
     }),
     istanbul({
       include: ['src/store/*', 'src/pages/*', 'src/components/*'],

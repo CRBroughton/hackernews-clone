@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { OperationResult } from '@urql/vue'
-import { useMutation } from '@urql/vue'
 import { useCookie } from 'vue-cookie-next'
 import { promiseTimeout } from '@vueuse/core'
 import { email, required } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
+import type { CombinedError } from 'villus'
+import { useMutation } from 'villus'
 import { Login } from '@/graphql/mutations'
 import { authStore } from '@/store'
 
@@ -28,14 +28,14 @@ const errors = computed (() => {
   return v$.value.$errors
 })
 
-const loginMutation = useMutation(Login)
-
-const goToHome = async(result: OperationResult<any, any>) => {
+const goToHome = async(result: { data: any; error: CombinedError }) => {
   networkResponse.value = result
   await promiseTimeout(1000)
   await router.push('/')
   location.reload()
 }
+
+const { execute } = useMutation(Login)
 
 const login = async(email: string, password: string) => {
   const isFormCorrect = await v$.value.$validate()
@@ -43,7 +43,8 @@ const login = async(email: string, password: string) => {
   if (!isFormCorrect) return
 
   const variables = { email, password }
-  loginMutation.executeMutation(variables).then(async(result) => {
+
+  execute(variables).then(async(result) => {
     if (result.error) {
       networkResponse.value = result
       return
