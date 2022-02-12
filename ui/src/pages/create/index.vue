@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useMutation } from '@urql/vue'
 import { required, url } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
+import { useMutation } from 'villus'
 import { Create } from '@/graphql/mutations'
 import { authStore } from '@/store'
 const router = useRouter()
 const store = authStore()
 
-const createMutation = useMutation(Create)
+const { execute } = useMutation(Create)
 const networkResponse = ref()
 
 const rules = {
@@ -32,7 +32,7 @@ const createPost = async(url: string, topic: string, description: string) => {
 
   if (!isFormCorrect) return
 
-  createMutation.executeMutation(variables).then(async(result) => {
+  execute(variables).then(async(result) => {
     if (result.error)
       networkResponse.value = result
 

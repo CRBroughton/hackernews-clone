@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useQuery } from '@urql/vue'
+import { useQuery } from 'villus'
 import { getUserPosts } from '@/graphql/queries'
 
 const result = useQuery(getUserPosts)
 
-const fetching = result.fetching
+const fetching = result.isFetching
 const data = result.data
 const error = result.error
 </script>

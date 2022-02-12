@@ -3,6 +3,7 @@ import { useCookie } from 'vue-cookie-next'
 import { promiseTimeout } from '@vueuse/core'
 import { email, required } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
+import type { CombinedError } from 'villus'
 import { useMutation } from 'villus'
 import { Login } from '@/graphql/mutations'
 import { authStore } from '@/store'
@@ -27,7 +28,7 @@ const errors = computed (() => {
   return v$.value.$errors
 })
 
-const goToHome = async(result) => {
+const goToHome = async(result: { data: any; error: CombinedError }) => {
   networkResponse.value = result
   await promiseTimeout(1000)
   await router.push('/')
