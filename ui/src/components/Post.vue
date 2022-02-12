@@ -21,8 +21,6 @@ const props = defineProps<Props>()
 const store = authStore()
 const router = useRouter()
 
-const voteMutation = useMutation(Vote)
-
 const networkResponse = ref()
 const userVoted = ref()
 const owner = ref()
@@ -42,14 +40,16 @@ useQuery(UserId).then((result) => {
   }
 })
 
-// const voteForPost = (postId: string) => {
-//   const variables = { postId }
-//   voteMutation.executeMutation(variables).then(async(result) => {
-//     if (result.error)
-//       networkResponse.value = result
-//   })
-//   userVoted.value = true
-// }
+const { execute } = useMutation(Vote)
+
+const voteForPost = (postId: string) => {
+  const variables = { postId }
+  execute(variables).then(async(result) => {
+    if (result.error)
+      networkResponse.value = result
+  })
+  userVoted.value = true
+}
 
 const goToTopic = (topic: string) => {
   router.push(`/topic/${encodeURIComponent(topic)}`)
