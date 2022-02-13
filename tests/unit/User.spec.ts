@@ -1,11 +1,20 @@
-import { prismaMock } from '../../src/singleton'
-import { createUser } from '../functions-without-context'
+import { createUser } from '../functions-with-context'
+import type { Context, MockContext } from '../../src/context'
+import { createMockContext } from '../../src/context'
+
+let mockCtx: MockContext
+let ctx: Context
+
+beforeEach(() => {
+  mockCtx = createMockContext()
+  ctx = mockCtx as unknown as Context
+})
 
 describe('User Tests', () => {
   test('should create new user ', async() => {
     const user = {
-      id: 'asasd',
-      name: 'Rich',
+      id: '34ce94bf-7019-4a53-8bd1-d0639f06aead',
+      name: 'Craig',
       email: 'hello@prisma.io',
       password: '1234',
       banned: false,
@@ -14,9 +23,9 @@ describe('User Tests', () => {
       votes: [],
     }
 
-    prismaMock.user.create.mockResolvedValue(user)
+    mockCtx.prisma.user.create.mockResolvedValue(user)
 
-    await expect(createUser(user)).resolves.toEqual(user)
+    await expect(createUser(user, ctx)).resolves.toEqual(user)
   })
 })
 
