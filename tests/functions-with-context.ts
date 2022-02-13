@@ -18,6 +18,9 @@ export async function findPosts(ctx: Context) {
 }
 
 export async function userPostQuery(ctx: Context) {
+  if (!ctx.userId)
+    throw new Error('No userID provided!')
+
   return await ctx.prisma.post.findMany({
     where: { postedById: ctx.userId },
   })
