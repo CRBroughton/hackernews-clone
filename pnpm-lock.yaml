@@ -13,6 +13,7 @@ specifiers:
   eslint: 8.6.0
   graphql: ^15.8.0
   jest: ^27.5.1
+  jest-mock-extended: 2.0.4
   jsonwebtoken: ~8.5.0
   nexus: ^1.1.0
   nodemon: ^2.0.15
@@ -41,6 +42,7 @@ devDependencies:
   apollo-server-core: 3.6.1_graphql@15.8.0
   eslint: 8.6.0
   jest: 27.5.1
+  jest-mock-extended: 2.0.4_jest@27.5.1+typescript@4.5.4
   nodemon: 2.0.15
   npm-check: 5.9.2
   prisma: 3.7.0
@@ -4489,6 +4491,17 @@ packages:
       stack-utils: 2.0.5
     dev: true
 
+  /jest-mock-extended/2.0.4_jest@27.5.1+typescript@4.5.4:
+    resolution: {integrity: sha512-MgL3B3GjURQFjjPGqbCANydA5BFNPygv0mYp4Tjfxohh9MWwxxX8Eq2p6ncCt/Vt+RAnaLlDaI7gwrDRD7Pt9A==}
+    peerDependencies:
+      jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0
+      typescript: ^3.0.0 || ^4.0.0
+    dependencies:
+      jest: 27.5.1
+      ts-essentials: 7.0.3_typescript@4.5.4
+      typescript: 4.5.4
+    dev: true
+
   /jest-mock/27.5.1:
     resolution: {integrity: sha512-K4jKbY1d4ENhbrG2zuPWaQBvDly+iZ2yAW+T1fATN78hc0sInwn7wZB8XtlNnvHug5RMwV897Xm4LqmPM4e2Og==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -6858,6 +6871,14 @@ packages:
     resolution: {integrity: sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==}
     engines: {node: '>=8'}
     dev: false
+
+  /ts-essentials/7.0.3_typescript@4.5.4:
+    resolution: {integrity: sha512-8+gr5+lqO3G84KdiTSMRLtuyJ+nTBVRKuCrK4lidMPdVeEp0uqC875uE5NMcaA7YYMN7XsNiFQuMvasF8HT/xQ==}
+    peerDependencies:
+      typescript: '>=3.7.0'
+    dependencies:
+      typescript: 4.5.4
+    dev: true
 
   /ts-jest/27.1.3_87d20739bacfd4db47ed64168ba1dd7c:
     resolution: {integrity: sha512-6Nlura7s6uM9BVUAoqLH7JHyMXjz8gluryjpPXxr3IxZdAXnU6FhjvVLHFtfd1vsE1p8zD1OJfskkc0jhTSnkA==}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
+    "test": "jest -i",
     "generate": "ts-node --transpile-only src/schema.ts",
     "pnpm:check": "NPM_CHECK_INSTALLER=pnpm npm-check -u",
     "docker": "nodemon --config nodemon.json src/index.ts",
@@ -24,6 +25,7 @@
     "apollo-server-core": "^3.6.1",
     "eslint": "8.6.0",
     "jest": "^27.5.1",
+    "jest-mock-extended": "2.0.4",
     "nodemon": "^2.0.15",
     "npm-check": "^5.9.2",
     "prisma": "^3.5.0",
