@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import Notification from '@/components/Notification.vue'
 import 'virtual:windi.css'
 
-const boostrap = (text: string, loader: boolean) => {
+const bootstrap = (text: string, loader: boolean) => {
   return mount(Notification, {
     props: {
       text,
@@ -19,11 +19,7 @@ describe('Notification Component', () => {
   it('renders a notification prop message', () => {
     const text = 'An error has occurred'
 
-    const wrapper = mount(Notification, {
-      props: {
-        text,
-      },
-    })
+    const wrapper = bootstrap(text, false)
 
     const notification = wrapper.get('[data-cy=notification]')
 
@@ -32,14 +28,14 @@ describe('Notification Component', () => {
   it('renders a spinner when in the loading state', () => {
     const text = 'Loading...'
 
-    const wrapper = boostrap(text, true)
+    const wrapper = bootstrap(text, true)
 
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(true)
   })
   it('doesnt render a spinner when not in the loading state', () => {
     const text = 'Finished Loading!'
 
-    const wrapper = boostrap(text, false)
+    const wrapper = bootstrap(text, false)
 
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(false)
   })
