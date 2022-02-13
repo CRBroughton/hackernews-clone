@@ -1,19 +1,23 @@
 import { prismaMock } from '../src/singleton'
 import { createUser } from './functions-without-context'
 
-test('should create new user ', async() => {
-  const user = {
-    id: 'asasd',
-    name: 'Rich',
-    email: 'hello@prisma.io',
-    password: '1234',
-    banned: false,
-    banReason: '',
-  }
+describe('User Tests', () => {
+  test('should create new user ', async() => {
+    const user = {
+      id: 'asasd',
+      name: 'Rich',
+      email: 'hello@prisma.io',
+      password: '1234',
+      banned: false,
+      banReason: '',
+      posts: [],
+      votes: [],
+    }
 
-  prismaMock.user.create.mockResolvedValue(user)
+    prismaMock.user.create.mockResolvedValue(user)
 
-  await expect(createUser(user)).resolves.toEqual(user)
+    await expect(createUser(user)).resolves.toEqual(user)
+  })
 })
 
 // test('should update a users name ', async() => {

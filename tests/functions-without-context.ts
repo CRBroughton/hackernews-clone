@@ -1,12 +1,7 @@
+import type { User } from '@prisma/client'
 import prisma from '../src/client'
 
-interface CreateUser {
-  name: string
-  email: string
-  password: string
-}
-
-export async function createUser(user: CreateUser) {
+export async function createUser(user: User) {
   return await prisma.user.create({
     data: user,
   })
