@@ -1,52 +1,71 @@
-import { prismaMock } from '../../src/singleton'
-import { createUser } from '../functions-without-context'
+import type { Post } from '@prisma/client'
+import { createUser, userPostQuery } from '../functions-with-context'
+import type { Context, MockContext } from '../../src/context'
+import { createMockContext } from '../../src/context'
+import { uuidGenerator } from '../../src/utils/uuidGenerator'
+
+let mockCtx: MockContext
+let ctx: Context
+
+const posts = [{
+  id: uuidGenerator(),
+  createdAt: new Date(),
+  description: 'Code-First GraphQL schemas for JavaScript/TypeScript',
+  url: 'https://nexusjs.org',
+  topic: 'General',
+  postedById: '34ce94bf-7019-4a53-8bd1-d0639f06aead',
+},
+{
+  id: uuidGenerator(),
+  createdAt: new Date(),
+  description: 'Code-First GraphQL schemas for JavaScript/TypeScript',
+  url: 'https://nexusjs.org',
+  topic: 'General',
+  postedById: '34ce94bf-7019-4a53-8bd1-d0639f06aesad',
+}]
+
+const user = {
+  id: '34ce94bf-7019-4a53-8bd1-d0639f06aead',
+  name: 'Craig',
+  email: 'hello@prisma.io',
+  password: '1234',
+  banned: false,
+  banReason: '',
+  posts: [] as Post[],
+  votes: [],
+}
+
+beforeEach(() => {
+  mockCtx = createMockContext()
+  ctx = mockCtx as unknown as Context
+})
 
 describe('User Tests', () => {
   test('should create new user ', async() => {
-    const user = {
-      id: 'asasd',
-      name: 'Rich',
-      email: 'hello@prisma.io',
-      password: '1234',
-      banned: false,
-      banReason: '',
-      posts: [],
-      votes: [],
-    }
+    mockCtx.prisma.user.create.mockResolvedValue(user)
 
-    prismaMock.user.create.mockResolvedValue(user)
+    await expect(createUser(user, ctx)).resolves.toEqual(user)
+  })
 
-    await expect(createUser(user)).resolves.toEqual(user)
+  test('returns a users posts ', async() => {
+    mockCtx.prisma.user.create.mockResolvedValue(user)
+    mockCtx.prisma.post.create.mockResolvedValue(posts[0])
+    mockCtx.prisma.post.create.mockResolvedValue(posts[1])
+
+    mockCtx.prisma.post.findMany.mockResolvedValue(posts)
+
+    await expect(userPostQuery(ctx)).resolves.toEqual(posts)
+  })
+
+  test('provides an error for when no userId is present', async() => {
+    mockCtx.prisma.user.create.mockResolvedValue(user)
+    mockCtx.prisma.post.create.mockResolvedValue(posts[0])
+    mockCtx.prisma.post.create.mockResolvedValue(posts[1])
+
+    mockCtx.prisma.post.findMany.mockResolvedValue(posts)
+
+    ctx.userId = ''
+
+    await expect(userPostQuery(ctx)).rejects.toThrow('No userID provided!')
   })
 })
-
-// test('should update a users name ', async() => {
-//   const user = {
-//     id: 1,
-//     name: 'Rich Haines',
-//     email: 'hello@prisma.io',
-//   }
-
-//   prismaMock.user.update.mockResolvedValue(user)
-
-//   await expect(updateUsername(user)).resolves.toEqual({
-//     id: 1,
-//     name: 'Rich Haines',
-//     email: 'hello@prisma.io',
-//   })
-// })
-
-// test('should fail if user does not accept terms', async() => {
-//   const user = {
-//     id: 1,
-//     name: 'Rich Haines',
-//     email: 'hello@prisma.io',
-//     acceptTermsAndConditions: false,
-//   }
-
-//   prismaMock.user.create.mockRejectedValue(new Error('User must accept terms!'))
-
-//   await expect(createUser(user)).resolves.toEqual(
-//     new Error('User must accept terms!'),
-//   )
-// })

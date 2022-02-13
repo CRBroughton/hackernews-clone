@@ -1,5 +1,5 @@
 import { extendType, objectType } from 'nexus'
-
+import { userPostQuery as postQuery } from '../../tests/functions-with-context'
 export const User = objectType({
   name: 'User',
   definition(t) {
@@ -48,9 +48,7 @@ export const userPostQuery = extendType({
     t.nonNull.list.nonNull.field('getUserPosts', {
       type: 'Post',
       resolve(_parent, _args, context) {
-        return context.prisma.post.findMany({
-          where: { postedById: context.userId },
-        })
+        return postQuery(context)
       },
     })
   },
