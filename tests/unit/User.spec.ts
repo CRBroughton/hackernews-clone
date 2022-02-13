@@ -1,5 +1,5 @@
-import { prismaMock } from '../src/singleton'
-import { createUser } from './functions-without-context'
+import { prismaMock } from '../../src/singleton'
+import { createUser } from '../functions-without-context'
 
 describe('User Tests', () => {
   test('should create new user ', async() => {
