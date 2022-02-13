@@ -2,9 +2,9 @@
 import { promiseTimeout } from '@vueuse/core'
 import { useVuelidate } from '@vuelidate/core'
 import { email, minLength, required } from '@vuelidate/validators'
-
 import { useMutation } from 'villus'
-import { Signup } from '@/graphql/mutations'
+import type { Signup } from '@/Types'
+import { SignupMutation } from '@/graphql/mutations'
 import { authStore } from '@/store'
 
 const router = useRouter()
@@ -32,12 +32,12 @@ const errors = computed (() => {
   return v$.value.$errors
 })
 
-const { execute } = useMutation(Signup)
+const { execute } = useMutation(SignupMutation)
 
-const signup = async(name: string, email: string, password: string) => {
+const signup = async(signup: Signup) => {
   const isFormCorrect = await v$.value.$validate()
 
-  const variables = { name, email, password }
+  const variables = { ...signup }
 
   if (!isFormCorrect) return
 
@@ -56,7 +56,7 @@ const signup = async(name: string, email: string, password: string) => {
       <input v-model="store.credentials.username" class="border border-2" type="text" placeholder="username">
       <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
       <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
-      <button class="border border-2" @click.prevent="signup(store.credentials.username, store.credentials.email, store.credentials.password)">
+      <button class="border border-2" @click.prevent="signup(store.credentials)">
         Submit
       </button>
       <div class="flex flex-col fixed bottom-0 right-0">

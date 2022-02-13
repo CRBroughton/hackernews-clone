@@ -1,5 +1,5 @@
-export type Credentials = (
-  email: string,
-  password: string,
-  username?: string
-) => void
+export interface Signup {
+  username: string
+  email: string
+  password: string
+}
