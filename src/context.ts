@@ -12,11 +12,13 @@ export interface Context {
 
 export type MockContext = {
   prisma: DeepMockProxy<PrismaClient>
+  userId?: string
 }
 
 export const createMockContext = (): MockContext => {
   return {
     prisma: mockDeep<PrismaClient>(),
+    userId: '34ce94bf-7019-4a53-8bd1-d0639f06aead',
   }
 }
 
