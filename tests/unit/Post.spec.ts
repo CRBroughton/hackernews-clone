@@ -47,6 +47,9 @@ describe('Post Tests', () => {
 
   test('should return all posts', async() => {
     mockCtx.prisma.post.create.mockResolvedValue(posts[0])
+    mockCtx.prisma.post.create.mockResolvedValue(posts[1])
+    mockCtx.prisma.post.create.mockResolvedValue(posts[3])
+
     mockCtx.prisma.post.findMany.mockResolvedValue(posts)
 
     await expect(findPosts(ctx)).resolves.toEqual(posts)

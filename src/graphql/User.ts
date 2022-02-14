@@ -1,4 +1,4 @@
-import { extendType, objectType } from 'nexus'
+import { extendType, nullable, objectType, stringArg } from 'nexus'
 import { userPostQuery as postQuery } from '../../tests/functions-with-context'
 export const User = objectType({
   name: 'User',
@@ -47,7 +47,13 @@ export const userPostQuery = extendType({
   definition(t) {
     t.nonNull.list.nonNull.field('getUserPosts', {
       type: 'Post',
-      resolve(_parent, _args, context) {
+      args: {
+        id: nullable(stringArg()),
+      },
+      resolve(_parent, args, context) {
+        if (args.id)
+          return postQuery(context, args.id)
+
         return postQuery(context)
       },
     })

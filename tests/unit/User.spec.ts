@@ -13,7 +13,7 @@ const posts = [{
   description: 'Code-First GraphQL schemas for JavaScript/TypeScript',
   url: 'https://nexusjs.org',
   topic: 'General',
-  postedById: '34ce94bf-7019-4a53-8bd1-d0639f06aead',
+  postedById: '34ce94bf-7019-4a53-8bd1-d0639f06aeadfff',
 },
 {
   id: uuidGenerator(),
@@ -48,13 +48,15 @@ describe('User Tests', () => {
   })
 
   test('returns a users posts ', async() => {
+    // This test only covers the returned value
+
     mockCtx.prisma.user.create.mockResolvedValue(user)
     mockCtx.prisma.post.create.mockResolvedValue(posts[0])
     mockCtx.prisma.post.create.mockResolvedValue(posts[1])
 
-    mockCtx.prisma.post.findMany.mockResolvedValue(posts)
+    mockCtx.prisma.post.findMany.mockResolvedValue([posts[1]])
 
-    await expect(userPostQuery(ctx)).resolves.toEqual(posts)
+    await expect(userPostQuery(ctx, user.id)).resolves.toEqual([posts[1]])
   })
 
   test('provides an error for when no userId is present', async() => {
