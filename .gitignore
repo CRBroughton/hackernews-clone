@@ -7,3 +7,5 @@ dev.db-journal
 docs
 ui/coverage
 ui/.nyc_output
+ui/dist
+.pnpm-store

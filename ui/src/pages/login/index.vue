@@ -5,8 +5,9 @@ import { email, required } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import type { CombinedError } from 'villus'
 import { useMutation } from 'villus'
-import { Login } from '@/graphql/mutations'
+import { LoginMutation } from '@/graphql/mutations'
 import { authStore } from '@/store'
+import type { Login } from '@/Types'
 
 const cookie = useCookie()
 const router = useRouter()
@@ -35,14 +36,14 @@ const goToHome = async(result: { data: any; error: CombinedError }) => {
   location.reload()
 }
 
-const { execute } = useMutation(Login)
+const { execute } = useMutation(LoginMutation)
 
-const login = async(email: string, password: string) => {
+const login = async(login: Login) => {
   const isFormCorrect = await v$.value.$validate()
 
   if (!isFormCorrect) return
 
-  const variables = { email, password }
+  const variables = { ...login }
 
   execute(variables).then(async(result) => {
     if (result.error) {
@@ -63,7 +64,7 @@ const login = async(email: string, password: string) => {
     <div class="flex flex-col gap-1 w-60 p-2">
       <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
       <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
-      <button class="border border-2" @click.prevent="login(store.credentials.email, store.credentials.password)">
+      <button class="border border-2" @click.prevent="login(store.credentials)">
         Submit
       </button>
       <div class="flex flex-col fixed bottom-0 right-0">
