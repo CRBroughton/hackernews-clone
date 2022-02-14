@@ -10,6 +10,13 @@ import routes from '~pages'
 
 const app = createApp(App)
 
+const boot = async() => {
+  if (process.env.NODE_ENV === 'development') {
+    const { worker } = await import('./mocks/browser')
+    await worker.start()
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -31,4 +38,6 @@ const client = createClient({
   use: [authPlugin, ...defaultPlugins()],
 })
 
-app.use(router).use(VueCookieNext).use(createPinia()).use(client).mount('#app')
+boot().then(() => {
+  app.use(router).use(VueCookieNext).use(createPinia()).use(client).mount('#app')
+})
