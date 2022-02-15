@@ -12,6 +12,7 @@ type TestContext = {
   client: GraphQLClient
   prisma: PrismaClient
 }
+
 export function createTestContext(): TestContext {
   const ctx = {} as TestContext
   const graphqlCtx = graphqlTestContext()
@@ -33,6 +34,7 @@ export function createTestContext(): TestContext {
 
   return ctx
 }
+
 function graphqlTestContext() {
   let serverInstance: ServerInfo | null = null
 
@@ -52,6 +54,7 @@ function graphqlTestContext() {
     },
   }
 }
+
 function prismaTestContext() {
   const prismaBinary = join(__dirname, '..', 'node_modules', '.bin', 'prisma')
   let prismaClient: null | PrismaClient = null
@@ -59,7 +62,7 @@ function prismaTestContext() {
   return {
     async before() {
       // Run the migrations to ensure our schema has the required structure
-      execSync(`${prismaBinary} db push --preview-feature`)
+      execSync(`${prismaBinary} db push`)
       // Construct a new Prisma Client connected to the generated schema
       prismaClient = new PrismaClient()
       return prismaClient
