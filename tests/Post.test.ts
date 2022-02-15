@@ -12,6 +12,8 @@ it('ensures that a draft can be created and published', async() => {
   `)
   // Snapshot that draft and expect `published` to be false
   expect(feed).toMatchInlineSnapshot() // 3
+  const persistedData = await ctx.prisma.post.findMany()
+  expect(persistedData).toMatchInlineSnapshot()
 //   // Publish the previously created draft
 //   const publishResult = await ctx.client.request(`
 //     mutation publishDraft($draftId: Int!) {
