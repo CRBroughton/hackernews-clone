@@ -19,7 +19,7 @@ const goToHome = async(result: any) => {
 
 const rules = {
   credentials: {
-    username: { required },
+    name: { required },
     email: { required, email },
     password: { required, minLength: minLength(8) },
   },
@@ -53,7 +53,7 @@ const signup = async(signup: Signup) => {
 <template>
   <DefaultLayout>
     <div class="flex flex-col gap-1 w-60 p-2">
-      <input v-model="store.credentials.username" class="border border-2" type="text" placeholder="username">
+      <input v-model="store.credentials.name" class="border border-2" type="text" placeholder="username">
       <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
       <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
       <button class="border border-2" @click.prevent="signup(store.credentials)">
