@@ -5,7 +5,7 @@ export const authStore = defineStore('main', {
       loggedIn: false,
       userId: '',
       credentials: reactive({
-        username: '',
+        name: '',
         email: '',
         password: '',
       }),
