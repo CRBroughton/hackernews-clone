@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gets posts from the a specific user 1`] = `
+Object {
+  "getTopicPosts": Array [
+    Object {
+      "description": "Vite.js",
+      "id": "040688e1-c08f-4752-8d5f-888ffb36ef02",
+      "postedBy": Object {
+        "email": "alice@prisma.io",
+        "id": "97527cbe-2de0-40cd-a953-8caae780e66e",
+        "name": "Alice",
+      },
+      "topic": "General",
+      "url": "https://vitejs.dev",
+      "voters": Array [],
+    },
+    Object {
+      "description": "My Portfolio",
+      "id": "2df7837b-788d-4410-aa65-919da54f7175",
+      "postedBy": Object {
+        "email": "alice@prisma.io",
+        "id": "97527cbe-2de0-40cd-a953-8caae780e66e",
+        "name": "Alice",
+      },
+      "topic": "General",
+      "url": "https://crbroughton.me",
+      "voters": Array [],
+    },
+    Object {
+      "description": "Code-First GraphQL schemas for JavaScript/TypeScript",
+      "id": "16e11628-462a-4235-afb2-21c0db7425ba",
+      "postedBy": Object {
+        "email": "alice@prisma.io",
+        "id": "97527cbe-2de0-40cd-a953-8caae780e66e",
+        "name": "Alice",
+      },
+      "topic": "General",
+      "url": "https://nexusjs.org",
+      "voters": Array [],
+    },
+  ],
+}
+`;
