@@ -4,6 +4,8 @@ This is a basic Hackernews / Reddit clone using Prisma, PostgreSQL and GraphQL N
 
 For information on the front end side of the stack, see the README.md in the ui folder.
 
+Looking to test? Checkout the release branch as this branch is considered 'stable'.
+
 ## Installation
 
 To install dependances, run:
