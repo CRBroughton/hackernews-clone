@@ -20,7 +20,7 @@ export async function findPosts(ctx: Context) {
 export async function userPostQuery(ctx: Context, userId?: string) {
   let user
 
-  if (!userId || !ctx.userId)
+  if (!userId && !ctx.userId)
     throw new Error('No userID provided!')
 
   if (userId)
