@@ -16,7 +16,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <div class="w-full sm:(w-96) mx-5 mt-10">
+  <div class="w-full sm:(w-96) px-5 mt-10 ">
     <FormKit
       v-slot="{ state: { valid } }"
       v-model="store.credentials"
@@ -51,7 +51,7 @@ const props = defineProps<Props>()
           matches: 'Please include at least one symbol',
         }"
         placeholder="Your password"
-        help="Choose an account password"
+        :help="props.passwordMsg"
       />
       <FormKit type="submit" :disabled="!valid" />
     </FormKit>
