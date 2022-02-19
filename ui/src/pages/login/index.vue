@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useCookie } from 'vue-cookie-next'
 import { promiseTimeout } from '@vueuse/core'
-import { email, required } from '@vuelidate/validators'
-import { useVuelidate } from '@vuelidate/core'
 import type { CombinedError } from 'villus'
 import { useMutation } from 'villus'
 import { LoginMutation } from '@/graphql/mutations'
@@ -15,20 +13,6 @@ const store = authStore()
 
 const networkResponse = ref()
 
-const rules = {
-  credentials: {
-    email: { required, email },
-    password: { required },
-  },
-}
-
-const v$ = useVuelidate(rules, store)
-
-const errors = computed (() => {
-  networkResponse.value = ''
-  return v$.value.$errors
-})
-
 const goToHome = async(result: { data: any; error: CombinedError }) => {
   networkResponse.value = result
   await promiseTimeout(1000)
@@ -39,10 +23,6 @@ const goToHome = async(result: { data: any; error: CombinedError }) => {
 const { execute } = useMutation(LoginMutation)
 
 const login = async(login: Login) => {
-  const isFormCorrect = await v$.value.$validate()
-
-  if (!isFormCorrect) return
-
   const variables = { ...login }
 
   execute(variables).then(async(result) => {
@@ -61,21 +41,18 @@ const login = async(login: Login) => {
 
 <template>
   <DefaultLayout>
-    <div class="flex flex-col gap-1 w-60 p-2">
-      <input v-model="store.credentials.email" class="border border-2" type="text" placeholder="email">
-      <input v-model="store.credentials.password" class="border border-2" type="text" placeholder="password">
-      <button class="border border-2" @click.prevent="login(store.credentials)">
-        Submit
-      </button>
+    <Form
+      email-msg="What is your email?"
+      password-msg="What is your password?"
+      :execute="login"
+    />
+    <div class="flex justify-center">
       <div class="flex flex-col fixed bottom-0 right-0">
         <div v-if="networkResponse?.data">
-          <Notification text="Successfully Logged In!" />
+          <Notification text="Successfully logged in!" />
         </div>
         <div v-if="networkResponse?.error">
-          <Notification :text="networkResponse.error.toString().slice(9)" />
-        </div>
-        <div v-for="error in errors" :key="error.$uid">
-          <Notification :text="`${error.$property} ${error.$message.toString().slice(5)}`" />
+          <Notification :text="networkResponse.error" />
         </div>
       </div>
     </div>
