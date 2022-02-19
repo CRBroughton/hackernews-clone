@@ -1,6 +1,23 @@
 <script setup lang="ts">
 import { useQuery } from 'villus'
+import { useCookie } from 'vue-cookie-next'
 import { getUserPosts } from '@/graphql/queries'
+import { authStore } from '@/store'
+
+const router = useRouter()
+
+onMounted(() => {
+  const cookie = useCookie()
+  const store = authStore()
+  const storedCookie = cookie.getCookie('Authorization')
+  if (!storedCookie) {
+    store.logInUser(false)
+    router.push('/')
+    return
+  }
+
+  store.logInUser(true)
+})
 
 const result = useQuery(getUserPosts)
 
