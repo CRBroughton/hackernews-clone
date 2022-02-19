@@ -34,7 +34,7 @@ const signup = async(signup: Signup) => {
       username
       username-msg="What would you like your username to be?"
       email-msg="What email should we use?"
-      password-msg="What password should we use"
+      password-msg="What password should we use?"
       :execute="signup"
     />
     <div class="flex justify-center">
