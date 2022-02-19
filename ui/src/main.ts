@@ -9,6 +9,8 @@ import { VueCookieNext } from 'vue-cookie-next'
 import App from './App.vue'
 import routes from '~pages'
 
+import '@formkit/themes/genesis/theme.css'
+
 const app = createApp(App)
 
 const router = createRouter({
