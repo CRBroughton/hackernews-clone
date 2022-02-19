@@ -3,10 +3,8 @@ import { promiseTimeout } from '@vueuse/core'
 import { useMutation } from 'villus'
 import type { Signup } from '@/Types'
 import { SignupMutation } from '@/graphql/mutations'
-import { authStore } from '@/store'
 
 const router = useRouter()
-const store = authStore()
 const networkResponse = ref()
 
 const goToHome = async(result: any) => {
@@ -32,47 +30,14 @@ const signup = async(signup: Signup) => {
 
 <template>
   <DefaultLayout>
+    <Form
+      username
+      username-msg="What would you like your username to be?"
+      email-msg="What email should we use?"
+      password-msg="What password should we use"
+      :execute="signup"
+    />
     <div class="flex justify-center">
-      <div class="w-full sm:(w-96) mx-5 mt-10">
-        <FormKit
-          v-slot="{ state: { valid } }"
-          v-model="store.credentials"
-          type="form"
-          :actions="false"
-          submit-label="Register"
-          @submit="signup(store.credentials)"
-        >
-          <FormKit
-            type="text"
-            name="name"
-            label="Username"
-            placeholder="Jane Doe"
-            help="What would you like your username to be?"
-            validation="required"
-          />
-          <FormKit
-            type="text"
-            name="email"
-            label="Your email"
-            placeholder="jane@example.com"
-            help="What email should we use?"
-            validation="required|email"
-          />
-          <FormKit
-            type="password"
-            name="password"
-            label="Password"
-            validation="required|length:8|matches:/[^a-zA-Z]/"
-            :validation-messages="{
-              matches: 'Please include at least one symbol',
-            }"
-            placeholder="Your password"
-            help="Choose an account password"
-          />
-          <FormKit type="submit" :disabled="!valid" />
-          <pre wrap>Form validity: {{ valid }}</pre>
-        </FormKit>
-      </div>
       <div class="flex flex-col fixed bottom-0 right-0">
         <div v-if="networkResponse?.data">
           <Notification text="Successfully Signed Up!" />

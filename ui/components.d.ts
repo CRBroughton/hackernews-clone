@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     DefaultLayout: typeof import('./src/components/DefaultLayout.vue')['default']
+    Form: typeof import('./src/components/Form.vue')['default']
     MdiLoading: typeof import('~icons/mdi/loading')['default']
     MdiMenuUp: typeof import('~icons/mdi/menu-up')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
