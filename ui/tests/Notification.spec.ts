@@ -2,12 +2,14 @@ import { mount } from '@vue/test-utils'
 import Notification from '@/components/Notification.vue'
 import 'virtual:windi.css'
 
-const bootstrap = (text: string, loader: boolean) => {
+interface Props {
+  text: string
+  loader?: boolean
+}
+
+const bootstrap = (props: Props) => {
   return mount(Notification, {
-    props: {
-      text,
-      loader,
-    },
+    props: { ...props },
   })
 }
 
@@ -18,8 +20,9 @@ beforeEach(() => {
 describe('Notification Component', () => {
   it('renders a notification prop message', () => {
     const text = 'An error has occurred'
+    const loader = false
 
-    const wrapper = bootstrap(text, false)
+    const wrapper = bootstrap({ text, loader })
 
     const notification = wrapper.get('[data-cy=notification]')
 
@@ -27,15 +30,17 @@ describe('Notification Component', () => {
   })
   it('renders a spinner when in the loading state', () => {
     const text = 'Loading...'
+    const loader = true
 
-    const wrapper = bootstrap(text, true)
+    const wrapper = bootstrap({ text, loader })
 
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(true)
   })
   it('doesnt render a spinner when not in the loading state', () => {
     const text = 'Finished Loading!'
+    const loader = false
 
-    const wrapper = bootstrap(text, false)
+    const wrapper = bootstrap({ text, loader })
 
     expect(wrapper.find('[data-cy=loader]').exists()).toBe(false)
   })

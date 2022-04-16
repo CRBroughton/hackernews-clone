@@ -8,9 +8,7 @@ interface Props {
 
 const bootstrap = (props: Props) => {
   return mount(NavBar, {
-    props: {
-      ...props,
-    },
+    props: { ...props },
   })
 }
 
