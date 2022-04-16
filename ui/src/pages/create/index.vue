@@ -4,6 +4,8 @@ import { useVuelidate } from '@vuelidate/core'
 import { useMutation } from 'villus'
 import { Create } from '@/graphql/mutations'
 import { authStore } from '@/store'
+import type { Post } from '@/Types'
+
 const router = useRouter()
 const store = authStore()
 
@@ -25,8 +27,16 @@ const errors = computed (() => {
   return v$.value.$errors
 })
 
-const createPost = async(url: string, topic: string, description: string) => {
-  const variables = { url, topic, description }
+const newPost = computed(() => {
+  return {
+    url: store.createPost.url,
+    topic: store.createPost.topic,
+    description: store.createPost.description,
+  }
+})
+
+const createPost = async({ ...Post }: Post) => {
+  const variables = Post
 
   const isFormCorrect = await v$.value.$validate()
 
@@ -52,7 +62,7 @@ const createPost = async(url: string, topic: string, description: string) => {
       <input v-model="store.createPost.topic" class="border border-2" type="text" placeholder="Topic">
       <input v-model="store.createPost.url" class="border border-2" type="text" placeholder="URL">
 
-      <button class="border border-2" @click="createPost(store.createPost.url, store.createPost.topic, store.createPost.description)">
+      <button class="border border-2" @click="createPost(newPost)">
         Submit
       </button>
       <div class="flex flex-col fixed bottom-0 right-0">
