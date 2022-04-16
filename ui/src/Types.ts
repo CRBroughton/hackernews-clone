@@ -9,8 +9,8 @@ export interface Login {
   password: string
 }
 
-export interface Post {
-  url: string
-  topic: string
+export type Post = (
+  url: string,
+  topic: string,
   description: string
-}
+) => void
