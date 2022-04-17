@@ -6,7 +6,6 @@ import WindiCSS from 'vite-plugin-windicss'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Pages from 'vite-plugin-pages'
-import istanbul from 'vite-plugin-istanbul'
 import Icons from 'unplugin-icons/vite'
 import ViteIconsResolver from 'unplugin-icons/resolver'
 export default defineConfig({
@@ -42,11 +41,6 @@ export default defineConfig({
         'vitest',
       ],
       dts: true,
-    }),
-    istanbul({
-      include: ['src/store/*', 'src/pages/*', 'src/components/*'],
-      exclude: ['node_modules', 'tests/'],
-      extension: ['.js', '.ts', '.vue'],
     }),
   ],
 
