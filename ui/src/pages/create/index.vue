@@ -54,17 +54,48 @@ const createPost = async({ ...Post }: Post) => {
 
 <template>
   <DefaultLayout>
-    <div class="flex flex-col gap-1 w-60 p-2">
-      <h1 class="text-3xl mb-4">
-        Create Post
-      </h1>
-      <input v-model="store.createPost.description" class="border border-2" type="text" placeholder="Description">
-      <input v-model="store.createPost.topic" class="border border-2" type="text" placeholder="Topic">
-      <input v-model="store.createPost.url" class="border border-2" type="text" placeholder="URL">
+    <h1 class="text-3xl mb-4">
+      Create Post
+    </h1>
 
-      <button class="border border-2" @click="createPost(newPost)">
-        Submit
-      </button>
+    <FormKit
+      v-slot="{ state: { valid } }"
+      v-model="store.createPost"
+      type="form"
+      :actions="false"
+      submit-label="Register"
+      @submit="createPost(newPost)"
+    >
+      <FormKit
+        type="text"
+        name="description"
+        label="Description"
+        placeholder="Description"
+        help="The description of your post"
+        validation="required"
+      />
+      <FormKit
+        type="text"
+        name="topic"
+        label="Topic"
+        placeholder="Topic"
+        help="The topic channel for your post"
+        validation="required"
+      />
+      <FormKit
+        type="url"
+        name="url"
+        label="URL"
+        validation="required|url"
+        :validation-messages="{
+          matches: 'Please include at least one symbol',
+        }"
+        placeholder="URL"
+        help="The URL for your post"
+      />
+      <FormKit type="submit" :disabled="!valid" />
+    </FormKit>
+    <div class="flex flex-col gap-1 w-60 p-2">
       <div class="flex flex-col fixed bottom-0 right-0">
         <div v-if="networkResponse?.error">
           <Notification :text="networkResponse.error.toString().slice(9)" />
