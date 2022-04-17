@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { useCookie } from 'vue-cookie-next'
-import { authStore } from '@/store'
 
-const store = authStore()
+interface Props {
+  loggedIn: boolean
+}
+
+const props = defineProps<Props>()
+
 const cookie = useCookie()
 
 const logout = () => {
@@ -16,22 +20,22 @@ const logout = () => {
     <router-link to="/">
       Hackernews Clone
     </router-link>
-    <div v-if="store.loggedIn" class="ml-auto">
-      <router-link to="/profile" class="mx-2">
+    <div v-if="props.loggedIn" class="ml-auto">
+      <router-link data-test="profile" to="/profile" class="mx-2">
         Profile
       </router-link>
-      <router-link to="/create" class="mr-2">
+      <router-link data-test="create" to="/create" class="mr-2">
         Create Post
       </router-link>
-      <button @click="logout">
+      <button data-test="logout" @click="logout">
         Logout
       </button>
     </div>
     <div v-else class="ml-auto">
-      <router-link to="/register">
+      <router-link data-test="register" to="/register">
         Register
       </router-link>
-      <router-link to="/login" class="mx-2">
+      <router-link data-test="login" to="/login" class="mx-2">
         Login
       </router-link>
     </div>

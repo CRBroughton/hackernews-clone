@@ -41,7 +41,7 @@ const login = async(login: Login) => {
 
 <template>
   <DefaultLayout>
-    <Form
+    <AuthenticationForm
       email-msg="What is your email?"
       password-msg="What is your password?"
       :execute="login"

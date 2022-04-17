@@ -8,3 +8,9 @@ export interface Login {
   email: string
   password: string
 }
+
+export type Post = (
+  url: string,
+  topic: string,
+  description: string
+) => void

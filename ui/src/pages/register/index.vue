@@ -30,7 +30,7 @@ const signup = async(signup: Signup) => {
 
 <template>
   <DefaultLayout>
-    <Form
+    <AuthenticationForm
       username
       username-msg="What would you like your username to be?"
       email-msg="What email should we use?"
