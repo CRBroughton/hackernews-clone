@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import Vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
 import Components from 'unplugin-vue-components/vite'
@@ -13,7 +13,7 @@ export default defineConfig({
     port: 4000,
   },
   test: {
-    global: true,
+    globals: true,
     environment: 'happy-dom',
   },
   plugins: [
