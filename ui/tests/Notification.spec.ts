@@ -24,7 +24,7 @@ describe('Notification Component', () => {
 
     const wrapper = bootstrap({ text, loader })
 
-    const notification = wrapper.get('[data-cy=notification]')
+    const notification = wrapper.get('[data-test=notification]')
 
     expect(notification.text()).toContain(text)
   })
@@ -34,7 +34,7 @@ describe('Notification Component', () => {
 
     const wrapper = bootstrap({ text, loader })
 
-    expect(wrapper.find('[data-cy=loader]').exists()).toBe(true)
+    expect(wrapper.find('[data-test=loader]').exists()).toBe(true)
   })
   it('doesnt render a spinner when not in the loading state', () => {
     const text = 'Finished Loading!'
@@ -42,6 +42,6 @@ describe('Notification Component', () => {
 
     const wrapper = bootstrap({ text, loader })
 
-    expect(wrapper.find('[data-cy=loader]').exists()).toBe(false)
+    expect(wrapper.find('[data-test=loader]').exists()).toBe(false)
   })
 })
