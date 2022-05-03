@@ -18,15 +18,22 @@
     "scss.lint.unknownAtRules": "ignore",
     "cSpell.words": [
         "antfu",
+        "attributify",
+        "doesnt",
         "formkit",
+        "Hackernews",
         "iconify",
+        "occured",
         "pinia",
         "pnpm",
+        "Squencer",
         "unplugin",
+        "Upvote",
         "vite",
         "vitejs",
         "vitest",
         "vueuse",
+        "windi",
         "windicss"
     ]
 }
