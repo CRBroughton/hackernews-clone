@@ -8,7 +8,7 @@ Looking to test? Checkout the release branch as this branch is considered 'stabl
 
 ## Installation
 
-To install dependances, run:
+To install dependencies, run:
 
 ```
 pnpm i && cd ui && pnpm i && cd ..
@@ -52,7 +52,7 @@ The entire application (minus the schema) are hot-reloading.
 
 ## Documentation
 
-To generate Prisma doumentation, run:
+To generate Prisma documentation, run:
 
 ```
 npx prisma-docs-generator serve
