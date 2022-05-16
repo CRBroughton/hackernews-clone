@@ -45,7 +45,7 @@ To create the Docker containers, first copy .env.example to .env and modify the 
 Then run:
 
 ```
-docker-compose up -d && cd ui && docker-compose up -d
+docker-compose up -d
 ```
 
 The entire application (minus the schema) are hot-reloading.
