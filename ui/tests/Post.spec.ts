@@ -1,6 +1,6 @@
 import { config, mount } from '@vue/test-utils'
 import { VILLUS_CLIENT, createClient } from 'villus'
-// import { createTestingPinia } from '@pinia/testing'
+import { createTestingPinia } from '@pinia/testing'
 import { VueRouterMock, createRouterMock, injectRouterMock } from 'vue-router-mock'
 import { routes } from '@/mocks/routes'
 import Post from '@/components/Post.vue'
@@ -26,9 +26,7 @@ const bootstrap = () => {
           url: 'http://localhost:3000',
         }),
       },
-      plugins: [useRouter],
-      // plugins: [useRouter(), createTestingPinia()],
-
+      plugins: [useRouter, createTestingPinia({ createSpy: vi.fn })],
     },
   })
 }
