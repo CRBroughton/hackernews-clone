@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { useCookie } from 'vue-cookie-next'
 import NavBar from '@/components/NavBar.vue'
 import 'virtual:windi.css'
 
@@ -6,9 +7,16 @@ interface Props {
   loggedIn: boolean
 }
 
+const cookie = useCookie()
+
 const bootstrap = (props: Props) => {
   return mount(NavBar, {
     props: { ...props },
+    global: {
+      provide: {
+        cookie,
+      },
+    },
   })
 }
 
