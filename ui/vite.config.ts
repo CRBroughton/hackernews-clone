@@ -10,7 +10,7 @@ import Icons from 'unplugin-icons/vite'
 import ViteIconsResolver from 'unplugin-icons/resolver'
 export default defineConfig({
   server: {
-    port: 4000,
+    port: 3000,
   },
   test: {
     globals: true,
