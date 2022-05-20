@@ -1,9 +1,11 @@
+import 'graphql-import-node'
+import { createServer } from '@graphql-yoga/node'
+import { context } from './context'
+import { schema } from './schema'
 
-import { server } from './server'
+async function main() {
+  const server = createServer({ schema, context })
+  await server.start()
+}
 
-const port = 3000
-
-server.listen({ port }).then(({ url }) => {
-  // eslint-disable-next-line no-console
-  console.log(`🚀  Server ready at ${url}`)
-})
+main()

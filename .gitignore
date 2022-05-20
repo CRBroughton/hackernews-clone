@@ -1,6 +1,5 @@
 node_modules
 nexus-typegen.ts
-schema.graphql
 .env
 dev.db
 dev.db-journal

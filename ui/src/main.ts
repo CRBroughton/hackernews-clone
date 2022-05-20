@@ -29,7 +29,7 @@ function authPlugin({ opContext }: ClientPluginContext) {
 }
 
 const client = createClient({
-  url: 'http://localhost:3000',
+  url: 'http://localhost:4000/graphql',
   use: [authPlugin, ...defaultPlugins()],
 })
 
