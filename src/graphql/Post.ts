@@ -1,4 +1,4 @@
-import { extendType, nonNull, objectType, stringArg } from 'nexus'
+import { extendType, list, nonNull, objectType, queryField, stringArg } from 'nexus'
 
 export const Post = objectType({
   name: 'Post',
@@ -33,32 +33,22 @@ export const ID = objectType({
   },
 })
 
-export const PostQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.nonNull.field('feed', {
-      type: 'Post',
-      async resolve(_parent, _args, context) {
-        return (await context.prisma.post.findMany()).reverse()
-      },
-    })
+export const PostQuery = queryField('feed', {
+  type: nonNull(list(nonNull('Post'))),
+  async resolve(_parent, _args, context) {
+    return (await context.prisma.post.findMany()).reverse()
   },
 })
 
-export const TopicQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.nonNull.field('getTopicPosts', {
-      type: 'Post',
-      args: {
-        topic: nonNull(stringArg()),
-      },
-      async resolve(_parent, args, context) {
-        return (await context.prisma.post.findMany({
-          where: { topic: args.topic },
-        })).reverse()
-      },
-    })
+export const TopicQuery = queryField('getTopicPosts', {
+  type: nonNull(list(nonNull('Post'))),
+  args: {
+    topic: nonNull(stringArg()),
+  },
+  async resolve(_parent, args, context) {
+    return (await context.prisma.post.findMany({
+      where: { topic: args.topic },
+    })).reverse()
   },
 })
 
