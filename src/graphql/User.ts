@@ -1,4 +1,4 @@
-import { extendType, nullable, objectType, stringArg } from 'nexus'
+import { nullable, objectType, queryField, stringArg } from 'nexus'
 import { userPostQuery as postQuery } from '../../tests/functions-with-context'
 export const User = objectType({
   name: 'User',
@@ -27,35 +27,25 @@ export const User = objectType({
   },
 })
 
-export const userIdQuery = extendType({
+export const userIdQuery = queryField('getUserId', {
   type: 'Query',
-  definition(t) {
-    t.nonNull.field('getUserId', {
-      type: 'String',
-      resolve(_parent, _args, context) {
-        if (!context.userId)
-          throw new Error('This user ID does not exist')
+  resolve(_parent, _args, context) {
+    if (!context.userId)
+      throw new Error('This user ID does not exist')
 
-        return context.userId
-      },
-    })
+    return context.userId
   },
 })
 
-export const userPostQuery = extendType({
+export const userPostQuery = queryField('getUserPosts', {
   type: 'Query',
-  definition(t) {
-    t.nonNull.list.nonNull.field('getUserPosts', {
-      type: 'Post',
-      args: {
-        id: nullable(stringArg()),
-      },
-      resolve(_parent, args, context) {
-        if (args.id)
-          return postQuery(context, args.id)
+  args: {
+    id: nullable(stringArg()),
+  },
+  resolve(_parent, args, context) {
+    if (args.id)
+      return postQuery(context, args.id)
 
-        return postQuery(context)
-      },
-    })
+    return postQuery(context)
   },
 })
