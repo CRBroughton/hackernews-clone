@@ -1,3 +1,4 @@
+import { GraphQLYogaError } from '@graphql-yoga/node'
 import { list, mutationField, nonNull, objectType, queryField, stringArg } from 'nexus'
 
 export const Post = objectType({
@@ -65,20 +66,20 @@ export const post = mutationField('post', {
     let topic = args.topic
 
     if (!args.description || !args.url)
-      throw new Error('Missing a required field!')
+      throw new GraphQLYogaError('Missing a required field!')
 
     if (!args.topic)
       topic = 'General'
 
     if (!context.userId)
-      throw new Error('Cannot post without logging in.')
+      throw new GraphQLYogaError('Cannot post without logging in.')
 
     const user = await context.prisma.user.findUnique({
       where: { id: context.userId },
     })
 
     if (user?.banned)
-      throw new Error(`You are banned! \r\n Reason: ${user.banReason}`)
+      throw new GraphQLYogaError(`You are banned! \r\n Reason: ${user.banReason}`)
 
     const newPost = context.prisma.post.create({
       data: {
@@ -110,13 +111,13 @@ export const deletePost = mutationField('deletePost', {
     })
 
     if (!context.userId)
-      throw new Error('Cannot post without logging in.')
+      throw new GraphQLYogaError('Cannot post without logging in.')
 
     if (!getPostedUser?.postedById)
-      throw new Error('Post does not exist!')
+      throw new GraphQLYogaError('Post does not exist!')
 
     if (getPostedUser?.postedById !== context.userId)
-      throw new Error('Cannot delete posts that you dont own!')
+      throw new GraphQLYogaError('Cannot delete posts that you dont own!')
 
     await context.prisma.post.delete({
       where: {

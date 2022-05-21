@@ -1,3 +1,4 @@
+import { GraphQLYogaError } from '@graphql-yoga/node'
 import { nullable, objectType, queryField, stringArg } from 'nexus'
 import { userPostQuery as postQuery } from '../../tests/functions-with-context'
 export const User = objectType({
@@ -31,7 +32,7 @@ export const userIdQuery = queryField('getUserId', {
   type: 'Query',
   resolve(_parent, _args, context) {
     if (!context.userId)
-      throw new Error('This user ID does not exist')
+      throw new GraphQLYogaError('This user ID does not exist')
 
     return context.userId
   },
