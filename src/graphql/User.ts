@@ -1,6 +1,7 @@
 import { GraphQLYogaError } from '@graphql-yoga/node'
-import { nullable, objectType, queryField, stringArg } from 'nexus'
+import { list, nonNull, nullable, objectType, queryField, stringArg } from 'nexus'
 import { userPostQuery as postQuery } from '../../tests/functions-with-context'
+
 export const User = objectType({
   name: 'User',
   definition(t) {
@@ -39,7 +40,7 @@ export const userIdQuery = queryField('getUserId', {
 })
 
 export const userPostQuery = queryField('getUserPosts', {
-  type: 'Query',
+  type: nonNull(list(nonNull('Post'))),
   args: {
     id: nullable(stringArg()),
   },
