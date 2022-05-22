@@ -10,6 +10,7 @@ type AuthPayload {
 type Mutation {
   authenticate(cookie: String!): AuthPayload!
   deletePost(id: String!): ID!
+  login(email: String!, password: String!): AuthPayload!
   post(description: String!, topic: String!, url: String!): Post!
   signup(email: String!, name: String!, password: String!): AuthPayload!
   vote(postId: String!): Vote
@@ -29,7 +30,6 @@ type Query {
   getTopicPosts(topic: String!): [Post!]!
   getUserId: String!
   getUserPosts(id: String): [Post!]!
-  login(email: String!, password: String!): AuthPayload!
 }
 
 type User {

@@ -1,4 +1,4 @@
-import { mutationField, nonNull, objectType, queryField, stringArg } from 'nexus'
+import { mutationField, nonNull, objectType, stringArg } from 'nexus'
 import { GraphQLYogaError } from '@graphql-yoga/node'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
@@ -51,7 +51,7 @@ export const signup = mutationField('signup', {
   },
 })
 
-export const login = queryField('login', {
+export const login = mutationField('login', {
   type: nonNull(AuthPayload),
   args: {
     email: nonNull(stringArg()),
