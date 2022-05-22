@@ -3,7 +3,8 @@ import { yogaServer } from '../../src/server'
 
 export const createPost = it('Creates a post', async() => {
   const user = await request(yogaServer).post('/graphql').send({
-    query: `{
+    query: `
+    mutation {
             login(email: "crbroughton@posteo.uk", password: "graphql") {
               token
             }
