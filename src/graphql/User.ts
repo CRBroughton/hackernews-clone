@@ -30,7 +30,7 @@ export const User = objectType({
 })
 
 export const userIdQuery = queryField('getUserId', {
-  type: 'Query',
+  type: nonNull('String'),
   resolve(_parent, _args, context) {
     if (!context.userId)
       throw new GraphQLYogaError('This user ID does not exist')
