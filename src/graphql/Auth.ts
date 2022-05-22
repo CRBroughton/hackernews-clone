@@ -15,7 +15,7 @@ export const AuthPayload = objectType({
 })
 
 export const signup = mutationField('signup', {
-  type: AuthPayload,
+  type: nonNull(AuthPayload),
   args: {
     email: nonNull(stringArg()),
     password: nonNull(stringArg()),
@@ -52,7 +52,7 @@ export const signup = mutationField('signup', {
 })
 
 export const login = queryField('login', {
-  type: AuthPayload,
+  type: nonNull(AuthPayload),
   args: {
     email: nonNull(stringArg()),
     password: nonNull(stringArg()),
@@ -87,7 +87,7 @@ export const login = queryField('login', {
 })
 
 export const authenticate = mutationField('authenticate', {
-  type: AuthPayload,
+  type: nonNull(AuthPayload),
   args: {
     cookie: nonNull(stringArg()),
   },

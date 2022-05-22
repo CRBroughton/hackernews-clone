@@ -54,7 +54,7 @@ export const TopicQuery = queryField('getTopicPosts', {
 })
 
 export const post = mutationField('post', {
-  type: Post,
+  type: nonNull(Post),
   args: {
     description: nonNull(stringArg()),
     url: nonNull(stringArg()),
@@ -95,7 +95,7 @@ export const post = mutationField('post', {
 })
 
 export const deletePost = mutationField('deletePost', {
-  type: ID,
+  type: nonNull(ID),
   args: {
     id: nonNull(stringArg()),
   },
