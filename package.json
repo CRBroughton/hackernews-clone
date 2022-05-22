@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn src/index.ts",
     "commit": "git cz",
-    "test": "npm run generate && jest -i",
+    "test": "npm run generate && npx prisma migrate reset && jest -i",
     "generate": "ts-node-dev --transpile-only src/schema.ts",
     "pnpm:check": "NPM_CHECK_INSTALLER=pnpm npm-check -u",
     "docker": "nodemon --config nodemon.json src/index.ts",
