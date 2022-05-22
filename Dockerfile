@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 4000
 
 RUN npm i --legacy-peer-deps && npx prisma generate
 

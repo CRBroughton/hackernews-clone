@@ -15,5 +15,28 @@
     "editor.wordWrap": "on",
     "npm-scripts.showStartNotification": false,
     "css.lint.unknownAtRules": "ignore",
-    "scss.lint.unknownAtRules": "ignore"
+    "scss.lint.unknownAtRules": "ignore",
+    "cSpell.words": [
+        "antfu",
+        "attributify",
+        "crbroughton",
+        "doesnt",
+        "formkit",
+        "Hackernews",
+        "iconify",
+        "occured",
+        "pinia",
+        "pnpm",
+        "signup",
+        "Squencer",
+        "typegen",
+        "unplugin",
+        "Upvote",
+        "vite",
+        "vitejs",
+        "vitest",
+        "vueuse",
+        "windi",
+        "windicss"
+    ]
 }
