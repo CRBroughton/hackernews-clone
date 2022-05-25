@@ -13,7 +13,7 @@ interface Props {
     id: string
     name: string
   }
-  voters?: Array<{id: string}>
+  voters?: Array<{ id: string }>
   voteCount: number
 }
 
@@ -44,7 +44,7 @@ const { execute } = useMutation(Vote)
 
 const voteForPost = (postId: string) => {
   const variables = { postId }
-  execute(variables).then(async(result) => {
+  execute(variables).then(async (result) => {
     if (result.error)
       networkResponse.value = result
   })
@@ -67,10 +67,10 @@ const goToTopic = (topic: string) => {
     <div :class="{ 'ml-5': !showUpvote } ">
       <h1 class="text-sm">
         <a data-test="description" :href="props.url">{{ props.description }}</a>
-        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${ props.url })` }}</a>
+        <a :href="props.url" class="hover:underline hover:cursor-pointer">{{ ` (${props.url})` }}</a>
       </h1>
       <p class="text-xs text-gray-700">
-        {{ `${ props.voteCount } points` }} {{ `posted by ${ username } ` }} on
+        {{ `${props.voteCount} points` }} {{ `posted by ${username} ` }} on
         <button class="hover:underline hover:cursor-pointer" @click="goToTopic(props.topic)">
           {{ props.topic }}
         </button>

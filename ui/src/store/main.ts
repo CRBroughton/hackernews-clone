@@ -1,4 +1,3 @@
-
 export const authStore = defineStore('main', {
   state: () => {
     return {

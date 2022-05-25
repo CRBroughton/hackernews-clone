@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useCookie } from 'vue-cookie-next'
 import { authStore } from '@/store'
@@ -7,10 +6,10 @@ onMounted(() => {
   const cookie = useCookie()
   const store = authStore()
   const storedCookie = cookie.getCookie('Authorization')
-  if (!storedCookie) return
+  if (!storedCookie)
+    return
   store.logInUser(true)
 })
-
 </script>
 
 <template>

@@ -13,7 +13,7 @@ const store = authStore()
 
 const networkResponse = ref()
 
-const goToHome = async(result: { data: any; error: CombinedError }) => {
+const goToHome = async (result: { data: any; error: CombinedError }) => {
   networkResponse.value = result
   await promiseTimeout(1000)
   await router.push('/')
@@ -22,10 +22,10 @@ const goToHome = async(result: { data: any; error: CombinedError }) => {
 
 const { execute } = useMutation(LoginMutation)
 
-const login = async(login: Login) => {
+const login = async (login: Login) => {
   const variables = { ...login }
 
-  execute(variables).then(async(result) => {
+  execute(variables).then(async (result) => {
     if (result.error) {
       networkResponse.value = result
       return
