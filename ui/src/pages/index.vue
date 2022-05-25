@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useQuery } from 'villus'
 import DefaultLayout from '@/components/DefaultLayout.vue'

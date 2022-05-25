@@ -8,17 +8,16 @@ const router = useRouter()
 const { execute } = useMutation(Create)
 const networkResponse = ref()
 
-const createPost = async({ ...Post }: Post) => {
+const createPost = async ({ ...Post }: Post) => {
   const variables = Post
 
-  execute(variables).then(async(result) => {
+  execute(variables).then(async (result) => {
     if (result.error)
       networkResponse.value = result
 
     else router.push('/')
   })
 }
-
 </script>
 
 <template>

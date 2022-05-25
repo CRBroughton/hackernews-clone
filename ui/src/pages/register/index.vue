@@ -7,7 +7,7 @@ import { SignupMutation } from '@/graphql/mutations'
 const router = useRouter()
 const networkResponse = ref()
 
-const goToHome = async(result: any) => {
+const goToHome = async (result: any) => {
   networkResponse.value = result
   await promiseTimeout(1000)
   router.push('/')
@@ -15,10 +15,10 @@ const goToHome = async(result: any) => {
 
 const { execute } = useMutation(SignupMutation)
 
-const signup = async(signup: Signup) => {
+const signup = async (signup: Signup) => {
   const variables = { ...signup }
 
-  execute(variables).then(async(result) => {
+  execute(variables).then(async (result) => {
     if (result.error) {
       networkResponse.value = result
       return
