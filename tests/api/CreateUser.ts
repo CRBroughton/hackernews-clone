@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { yogaServer } from '../../src/server'
 
-export const createUser = it('Creates a user', async() => {
+export const createUser = it('Creates a user', async () => {
   const response = await request(yogaServer).post('/graphql').send({
     query: ` 
         mutation {

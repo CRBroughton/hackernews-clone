@@ -26,7 +26,7 @@ const expectation = [
     voters: [],
   }]
 
-export const queryFeed = it('Queries the database', async() => {
+export const queryFeed = it('Queries the database', async () => {
   const response = await request(yogaServer).post('/graphql').send({
     query: `{ 
         feed {
