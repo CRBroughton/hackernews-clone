@@ -17,7 +17,7 @@ specifiers:
   graphql: 16.5.0
   graphql-import-node: ^0.0.5
   graphql-modules: ^2.0.0
-  graphql-request: ^4.0.0
+  graphql-request: 4.2.0
   jest: ^27.5.1
   jest-mock-extended: 2.0.4
   jsonwebtoken: ~8.5.0
@@ -53,7 +53,7 @@ devDependencies:
   get-port: 5.1.1
   graphql-import-node: 0.0.5_graphql@16.5.0
   graphql-modules: 2.0.0_graphql@16.5.0
-  graphql-request: 4.0.0_graphql@16.5.0
+  graphql-request: 4.2.0_graphql@16.5.0
   jest: 27.5.1
   jest-mock-extended: 2.0.4_jest@27.5.1+typescript@4.5.4
   nodemon: 2.0.15
@@ -4089,8 +4089,8 @@ packages:
       ramda: 0.27.2
     dev: true
 
-  /graphql-request/4.0.0_graphql@16.5.0:
-    resolution: {integrity: sha512-cdqQLCXlBGkaLdkLYRl4LtkwaZU6TfpE7/tnUQFl3wXfUPWN74Ov+Q61VuIh+AltS789YfGB6whghmCmeXLvTw==}
+  /graphql-request/4.2.0_graphql@16.5.0:
+    resolution: {integrity: sha512-uFeMyhhl8ss4LFgjlfPeAn2pqYw+CJto+cjj71uaBYIMMK2jPIqgHm5KEFxUk0YDD41A8Bq31a2b4G2WJBlp2Q==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
