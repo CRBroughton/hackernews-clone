@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { yogaServer } from '../../src/server'
 
-export const getUserPosts = it('Gets a users posts', async() => {
+export const getUserPosts = it('Gets a users posts', async () => {
   const posts = await request(yogaServer).post('/graphql')
     .send({
       query: ` {

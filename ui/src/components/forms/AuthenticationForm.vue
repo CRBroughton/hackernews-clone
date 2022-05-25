@@ -1,6 +1,7 @@
-
 <script setup lang="ts">
 import { authStore } from '@/store'
+
+const props = defineProps<Props>()
 
 const store = authStore()
 
@@ -11,8 +12,6 @@ interface Props {
   passwordMsg: string
   execute?: Function
 }
-
-const props = defineProps<Props>()
 </script>
 
 <template>
