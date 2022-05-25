@@ -22,7 +22,7 @@ specifiers:
   jest: ^27.5.1
   jest-mock-extended: 2.0.4
   jsonwebtoken: ~8.5.0
-  nexus: ^1.1.0
+  nexus: 1.3.0
   nodemon: ^2.0.15
   npm-check: ^5.9.2
   prisma: 3.14.0
@@ -40,7 +40,7 @@ dependencies:
   dotenv: 12.0.3
   graphql: 15.8.0
   jsonwebtoken: 8.5.1
-  nexus: 1.1.0_graphql@15.8.0
+  nexus: 1.3.0_graphql@15.8.0
   prisma-docs-generator: 0.5.0
 
 devDependencies:
@@ -5573,14 +5573,14 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /nexus/1.1.0_graphql@15.8.0:
-    resolution: {integrity: sha512-jUhbg22gKVY2YwZm726BrbfHaQ7Xzc0hNXklygDhuqaVxCuHCgFMhWa2svNWd1npe8kfeiu5nbwnz+UnhNXzCQ==}
+  /nexus/1.3.0_graphql@15.8.0:
+    resolution: {integrity: sha512-w/s19OiNOs0LrtP7pBmD9/FqJHvZLmCipVRt6v1PM8cRUYIbhEswyNKGHVoC4eHZGPSnD+bOf5A3+gnbt0A5/A==}
     peerDependencies:
-      graphql: ^14.5.8 || 15.x
+      graphql: 15.x || 16.x
     dependencies:
       graphql: 15.8.0
       iterall: 1.3.0
-      tslib: 2.3.1
+      tslib: 2.4.0
     dev: false
 
   /node-domexception/1.0.0:
