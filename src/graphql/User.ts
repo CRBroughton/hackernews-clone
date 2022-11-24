@@ -1,6 +1,7 @@
-import { GraphQLYogaError } from '@graphql-yoga/node'
+import { GraphQLError } from 'graphql'
 import { list, nonNull, nullable, objectType, queryField, stringArg } from 'nexus'
 import { userPostQuery as postQuery } from '../../tests/functions-with-context'
+import { Post } from './Post'
 
 export const User = objectType({
   name: 'User',
@@ -11,19 +12,27 @@ export const User = objectType({
     t.nonNull.boolean('banned')
     t.string('banReason')
     t.nonNull.list.nonNull.field('posts', {
-      type: 'Post',
-      resolve(parent, _args, context) {
-        return context.prisma.user
+      type: Post,
+      async resolve(parent, _args, context) {
+        const posts = await context.prisma.user
           .findUnique({ where: { id: parent.id } })
           .posts()
+
+        if (!posts)
+          return []
+        return posts
       },
     })
     t.nonNull.list.nonNull.field('votes', {
-      type: 'Post',
-      resolve(parent, _args, context) {
-        return context.prisma.user
+      type: Post,
+      async resolve(parent, _args, context) {
+        const posts = await context.prisma.user
           .findUnique({ where: { id: parent.id } })
           .votes()
+
+        if (!posts)
+          return []
+        return posts
       },
     })
   },
@@ -33,7 +42,7 @@ export const userIdQuery = queryField('getUserId', {
   type: nonNull('String'),
   resolve(_parent, _args, context) {
     if (!context.userId)
-      throw new GraphQLYogaError('This user ID does not exist')
+      throw new GraphQLError('This user ID does not exist')
 
     return context.userId
   },

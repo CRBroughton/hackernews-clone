@@ -1,5 +1,5 @@
 import { mutationField, nonNull, objectType, stringArg } from 'nexus'
-import { GraphQLYogaError } from '@graphql-yoga/node'
+import { GraphQLError } from 'graphql'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import { APP_SECRET, decodeAuthHeader } from '../utils/auth'
@@ -36,7 +36,7 @@ export const signup = mutationField('signup', {
     })
 
     if (existingUser || existingUserName)
-      throw new GraphQLYogaError('Account already created')
+      throw new GraphQLError('Account already created')
 
     const user = await context.prisma.user.create({
       data: { email, name, password },
@@ -64,7 +64,7 @@ export const login = mutationField('login', {
     })
 
     if (!user)
-      throw new GraphQLYogaError('No such user found')
+      throw new GraphQLError('No such user found')
 
     const valid = await bcrypt.compare(
       args.password,
@@ -72,10 +72,10 @@ export const login = mutationField('login', {
     )
 
     if (!valid)
-      throw new GraphQLYogaError('Invalid password')
+      throw new GraphQLError('Invalid password')
 
     if (user.banned)
-      throw new GraphQLYogaError(`You are banned! \r\n Reason: ${user.banReason}`)
+      throw new GraphQLError(`You are banned! \r\n Reason: ${user.banReason}`)
 
     const token = jwt.sign({ userId: user.id }, APP_SECRET)
 
@@ -100,7 +100,7 @@ export const authenticate = mutationField('authenticate', {
     })
 
     if (!user)
-      throw new GraphQLYogaError('This account does not exist')
+      throw new GraphQLError('This account does not exist')
 
     return {
       token,
