@@ -41,5 +41,8 @@
         "vueuse",
         "windi",
         "windicss"
+    ],
+    "conventionalCommits.scopes": [
+        "dependencies"
     ]
 }

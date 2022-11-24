@@ -1,6 +1,6 @@
 import { mutationField, nonNull, objectType, stringArg } from 'nexus'
 import type { User } from '@prisma/client'
-import { GraphQLYogaError } from '@graphql-yoga/node'
+import { GraphQLError } from 'graphql'
 
 export const Vote = objectType({
   name: 'Vote',
@@ -17,7 +17,7 @@ export const VoteMutation = mutationField('vote', {
   },
   async resolve(_parent, args, context) {
     if (!context.userId)
-      throw new GraphQLYogaError('Cannot vote without logging in.')
+      throw new GraphQLError('Cannot vote without logging in.')
 
     const user = await context.prisma.user.findUnique({ where: { id: context.userId } })
 
@@ -31,7 +31,7 @@ export const VoteMutation = mutationField('vote', {
     })
 
     if (getPostedUser?.postedById === context.userId)
-      throw new GraphQLYogaError('Cannot vote on your own posts!')
+      throw new GraphQLError('Cannot vote on your own posts!')
 
     const post = await context.prisma.post.update({
       where: {
