@@ -34,7 +34,7 @@ To start database and run existing migrations
 npx prisma migrate deploy
 ```
 
-To test the database, start Altair and run the 'Query Database' query
+To test the database, import the Insomnia collection and run the 'Query posts from database' query
 , which should return an empty array.
 
 
