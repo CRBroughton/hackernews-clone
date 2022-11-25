@@ -22,7 +22,7 @@ specifiers:
   unplugin-auto-import: 0.11.5
   unplugin-icons: 0.14.14
   unplugin-vue-components: 0.22.11
-  villus: 1.1.0
+  villus: 2.0.1
   vite: 3.2.4
   vite-plugin-pages: 0.27.1
   vite-plugin-windicss: 1.8.8
@@ -40,7 +40,7 @@ dependencies:
   '@vueuse/core': 9.6.0_vue@3.2.45
   graphql: 16.6.0
   pinia: 2.0.26_mgnvym7yiazkylwwogi5r767ue
-  villus: 1.1.0_graphql@16.6.0+vue@3.2.45
+  villus: 2.0.1_graphql@16.6.0+vue@3.2.45
   vue: 3.2.45
   vue-cookie-next: 1.3.0_vue@3.2.45
   vue-router: 4.1.6_vue@3.2.45
@@ -5019,11 +5019,11 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /villus/1.1.0_graphql@16.6.0+vue@3.2.45:
-    resolution: {integrity: sha512-l3wIbeyTrNFru/Tb8NoO7d8BlK3Pxj4SLP8z61E71qFdH1E7SUR+hEhirannmXIWi86x9X/zRy51r1TOlyHFDw==}
+  /villus/2.0.1_graphql@16.6.0+vue@3.2.45:
+    resolution: {integrity: sha512-SVzPzxhXQz1aKdT1gHgy5eDc1YwrRvFi0EKmCuL/WhHm7N992Xobj90x+qzIyAxjQXo9Jlb5rpKyYjTsv+NM7g==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-      vue: ^3.0.0
+      vue: ^3.0.0 || ^2.7.0
     dependencies:
       graphql: 16.6.0
       vue: 3.2.45
