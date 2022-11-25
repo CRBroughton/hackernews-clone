@@ -6,6 +6,7 @@ specifiers:
   '@formkit/vue': ^1.0.0-beta.2
   '@iconify/json': 2.1.143
   '@pinia/testing': 0.0.14
+  '@types/node': ^18.11.9
   '@vitejs/plugin-vue': 3.2.0
   '@vue/test-utils': 2.2.4
   '@vueuse/core': 9.6.0
@@ -48,6 +49,7 @@ devDependencies:
   '@antfu/eslint-config': 0.31.0_hsf322ms6xhhd4b5ne6lb74y4a
   '@iconify/json': 2.1.143
   '@pinia/testing': 0.0.14_pinia@2.0.26+vue@3.2.45
+  '@types/node': 18.11.9
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
   '@vue/test-utils': 2.2.4_vue@3.2.45
   c8: 7.12.0
@@ -60,7 +62,7 @@ devDependencies:
   unplugin-auto-import: 0.11.5_@vueuse+core@9.6.0
   unplugin-icons: 0.14.14
   unplugin-vue-components: 0.22.11_vue@3.2.45
-  vite: 3.2.4_sass@1.56.1
+  vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
   vite-plugin-pages: 0.27.1_vite@3.2.4
   vite-plugin-windicss: 1.8.8_vite@3.2.4
   vitest: 0.25.3_oawptfov672ujacze42asuyd6i
@@ -536,7 +538,7 @@ packages:
   /@types/concat-stream/1.6.1:
     resolution: {integrity: sha512-eHE4cQPoj6ngxBZMvVf6Hw7Mh4jMW4U9lpGmS5GBPB9RYxlFg+CHaVN7ErNY4W9XfLIEn20b4VDYaIrbq0q4uA==}
     dependencies:
-      '@types/node': 10.17.60
+      '@types/node': 18.11.9
     dev: true
 
   /@types/debug/4.1.7:
@@ -559,7 +561,7 @@ packages:
   /@types/form-data/0.0.33:
     resolution: {integrity: sha512-8BSvG1kGm83cyJITQMZSulnl6QV8jqAGreJsc5tPu1Jq0vTSOiY/k24Wx82JRpWwZSqrala6sd5rWi6aNXvqcw==}
     dependencies:
-      '@types/node': 10.17.60
+      '@types/node': 18.11.9
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -577,7 +579,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 10.17.60
+      '@types/node': 18.11.9
     dev: true
 
   /@types/lodash/4.14.190:
@@ -606,6 +608,10 @@ packages:
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
     dev: true
 
+  /@types/node/18.11.9:
+    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
+    dev: true
+
   /@types/node/8.10.66:
     resolution: {integrity: sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==}
     dev: true
@@ -625,7 +631,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 10.17.60
+      '@types/node': 18.11.9
     dev: true
 
   /@types/semver/7.3.13:
@@ -775,7 +781,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.4_sass@1.56.1
+      vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
       vue: 3.2.45
     dev: true
 
@@ -5040,7 +5046,7 @@ packages:
       json5: 2.2.1
       local-pkg: 0.4.2
       picocolors: 1.0.0
-      vite: 3.2.4_sass@1.56.1
+      vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
       yaml: 2.1.3
     transitivePeerDependencies:
       - supports-color
@@ -5054,13 +5060,13 @@ packages:
       '@windicss/plugin-utils': 1.8.8
       debug: 4.3.4
       kolorist: 1.5.1
-      vite: 3.2.4_sass@1.56.1
+      vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/3.2.4_2rmhkjgjmenvfxgvaxaaivi4vy:
+  /vite/3.2.4_ajklay5k626t46b6fyghkbup3i:
     resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -5085,41 +5091,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 10.17.60
-      esbuild: 0.15.15
-      postcss: 8.4.19
-      resolve: 1.22.1
-      rollup: 2.79.1
-      sass: 1.56.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /vite/3.2.4_sass@1.56.1:
-    resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
+      '@types/node': 18.11.9
       esbuild: 0.15.15
       postcss: 8.4.19
       resolve: 1.22.1
@@ -5153,7 +5125,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.3
       '@types/chai-subset': 1.3.3
-      '@types/node': 10.17.60
+      '@types/node': 18.11.9
       acorn: 8.8.0
       acorn-walk: 8.2.0
       chai: 4.3.6
@@ -5165,7 +5137,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 3.2.4_2rmhkjgjmenvfxgvaxaaivi4vy
+      vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
     transitivePeerDependencies:
       - less
       - sass
