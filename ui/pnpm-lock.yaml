@@ -4,7 +4,7 @@ specifiers:
   '@antfu/eslint-config': 0.31.0
   '@formkit/themes': ^1.0.0-beta.2
   '@formkit/vue': ^1.0.0-beta.2
-  '@iconify/json': 2.1.143
+  '@iconify/json': 2.1.144
   '@pinia/testing': 0.0.14
   '@types/node': ^18.11.9
   '@vitejs/plugin-vue': 3.2.0
@@ -16,10 +16,10 @@ specifiers:
   happy-dom: 7.7.0
   http-server: 14.1.1
   npm-check: 6.0.1
-  pinia: 2.0.26
+  pinia: 2.0.27
   sass: 1.56.1
   typescript: 4.9.3
-  unplugin-auto-import: 0.11.5
+  unplugin-auto-import: 0.12.0
   unplugin-icons: 0.14.14
   unplugin-vue-components: 0.22.11
   villus: 2.0.1
@@ -39,7 +39,7 @@ dependencies:
   '@formkit/vue': 1.0.0-beta.2_vue@3.2.45
   '@vueuse/core': 9.6.0_vue@3.2.45
   graphql: 16.6.0
-  pinia: 2.0.26_mgnvym7yiazkylwwogi5r767ue
+  pinia: 2.0.27_mgnvym7yiazkylwwogi5r767ue
   villus: 2.0.1_graphql@16.6.0+vue@3.2.45
   vue: 3.2.45
   vue-cookie-next: 1.3.0_vue@3.2.45
@@ -47,8 +47,8 @@ dependencies:
 
 devDependencies:
   '@antfu/eslint-config': 0.31.0_hsf322ms6xhhd4b5ne6lb74y4a
-  '@iconify/json': 2.1.143
-  '@pinia/testing': 0.0.14_pinia@2.0.26+vue@3.2.45
+  '@iconify/json': 2.1.144
+  '@pinia/testing': 0.0.14_pinia@2.0.27+vue@3.2.45
   '@types/node': 18.11.9
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
   '@vue/test-utils': 2.2.4_vue@3.2.45
@@ -59,7 +59,7 @@ devDependencies:
   npm-check: 6.0.1
   sass: 1.56.1
   typescript: 4.9.3
-  unplugin-auto-import: 0.11.5_@vueuse+core@9.6.0
+  unplugin-auto-import: 0.12.0_@vueuse+core@9.6.0
   unplugin-icons: 0.14.14
   unplugin-vue-components: 0.22.11_vue@3.2.45
   vite: 3.2.4_ajklay5k626t46b6fyghkbup3i
@@ -417,15 +417,11 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.143:
-    resolution: {integrity: sha512-atN7UAsuRgXkXE9MiOh59T2hIkN3ulE6GVbfZjKeYPYdyRpsAgFsLOAMjJ+u6jIzaiZn+rSVwx7m2gQG47sN0A==}
+  /@iconify/json/2.1.144:
+    resolution: {integrity: sha512-U4W9EHgDVKk/ll8fJ8J6atgtYj9MjPUiKtVlMlyz+SO90lI34QbgVJZOP/DEezLP/HcAIDLS2pgX+x+kFIkeWg==}
     dependencies:
-      '@iconify/types': 1.1.0
+      '@iconify/types': 2.0.0
       pathe: 0.3.7
-    dev: true
-
-  /@iconify/types/1.1.0:
-    resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
     dev: true
 
   /@iconify/types/2.0.0:
@@ -487,12 +483,12 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@pinia/testing/0.0.14_pinia@2.0.26+vue@3.2.45:
+  /@pinia/testing/0.0.14_pinia@2.0.27+vue@3.2.45:
     resolution: {integrity: sha512-ZmZwVNd/NnKYLIfjfuKl0zlJ3UdiXFpsHzSlL6wCeezSlyrqGMxsIQKv0J6fleu38gyCNTPBEipfxrt8V4+VIg==}
     peerDependencies:
       pinia: '>=2.0.19'
     dependencies:
-      pinia: 2.0.26_mgnvym7yiazkylwwogi5r767ue
+      pinia: 2.0.27_mgnvym7yiazkylwwogi5r767ue
       vue-demi: 0.12.0_vue@3.2.45
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -4041,8 +4037,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pinia/2.0.26_mgnvym7yiazkylwwogi5r767ue:
-    resolution: {integrity: sha512-tSxZNUcMGxQOvKZRjPKXxd2+/2NZhRF/CoYVE/+K6uE/Z3v1Oi4fcQFpxu5nMB1dCchjXUZ+lz0tBxV5ntwmQQ==}
+  /pinia/2.0.27_mgnvym7yiazkylwwogi5r767ue:
+    resolution: {integrity: sha512-nOnXP0OFeL8R4WjAHsterU+11vptda643gH02xKNtSCDPiRzVfRYodOLihLDoa0gL1KKuQKV+KOzEgdt3YvqEw==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
@@ -4879,8 +4875,8 @@ packages:
       '@types/unist': 2.0.6
     dev: true
 
-  /unplugin-auto-import/0.11.5_@vueuse+core@9.6.0:
-    resolution: {integrity: sha512-nvbL2AQwLRR8wbHpJ6L1EBVNmjN045RSedTa4NtsGRkSQFXkI1iKHs4dTqJwcKZsnFrZOAKtLPiN1/oQTObLZw==}
+  /unplugin-auto-import/0.12.0_@vueuse+core@9.6.0:
+    resolution: {integrity: sha512-y1flixUHt0UioxeUwXe4N9GmIJskBz7uoC2qFGaUJO1feN9PYITHhRVqfXxYt7VAaZ24InNIeZIAIoQbRm3ZPw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
