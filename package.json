@@ -8,6 +8,9 @@
     "commit": "git cz",
     "test": "npm run generate && npx prisma migrate reset && jest -i",
     "generate": "ts-node-dev --transpile-only src/schema.ts",
+    "changeset": "npx changeset",
+    "changeset:status": "npx changeset status --verbose",
+    "changeset:version": "npx changeset version",
     "pnpm:check": "NPM_CHECK_INSTALLER=pnpm npm-check -u"
   },
   "prisma": {
@@ -18,6 +21,7 @@
   "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "0.34.1",
+    "@changesets/cli": "^2.26.0",
     "@types/bcryptjs": "~2.4.0",
     "@types/jest": "29.2.5",
     "@types/jsonwebtoken": "9.0.0",
