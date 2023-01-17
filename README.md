@@ -14,10 +14,36 @@ To install dependencies, run:
 pnpm i && cd ui && pnpm i && cd ..
 ```
 
+Then copy the `.env.example` file to `.env` and customise the variables.
+
+Then run:
+
+```
+npx prisma generate
+```
+
+Then run the below to build the Docker containers:
+
+```
+docker-compose up -d && cd ui && docker-compose up -d && cd ..
+```
+
 To start database and run existing migrations
 
 ```
 npx prisma migrate deploy
+```
+
+To test the database, import the Insomnia collection and run the 'Query posts from database' query
+, which should return an empty array.
+
+
+## Common Commands
+
+To seed and reset the database, run:
+
+```
+npx prisma migrate reset
 ```
 
 To create a new migration:

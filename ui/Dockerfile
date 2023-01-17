@@ -1,19 +1,29 @@
-FROM node:16.0.0
+FROM node:16.0.0 AS pnpm
 
 LABEL author="Craig Broughton"
 LABEL author.email="CRBroughton@posteo.uk"
 
+RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store \
+  npm install -g pnpm@6.27.1
+
+FROM pnpm AS deps
+
 WORKDIR /app
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY package.json pnpm-lock.yaml ./
 
-ADD . .
+FROM deps AS builder
 
-RUN npm i --legacy-peer-deps
+WORKDIR /app
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store \
+  pnpm install --frozen-lockfile \
+  | grep -v "cross-device link not permitted\|Falling back to copying packages from store"
 
-EXPOSE 4000
+COPY . .
+
+FROM builder AS runner
+
+EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
