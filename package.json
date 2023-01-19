@@ -23,7 +23,7 @@
     "@antfu/eslint-config": "0.34.1",
     "@changesets/cli": "^2.26.0",
     "@types/bcryptjs": "~2.4.0",
-    "@types/jest": "29.2.5",
+    "@types/jest": "29.2.6",
     "@types/jsonwebtoken": "9.0.1",
     "@types/node": "18.11.18",
     "@types/supertest": "^2.0.12",
